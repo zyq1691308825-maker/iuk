@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>晋药灵枢 — 三味本草 · 生制之间 | JIN HERB PHARMACOPEIA</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#F4F4F6',
+                        'ink': '#0A0A0C',
+                        'cobalt': '#2200EE',
+                        'cobalt-light': '#EAE7FF',
+                        'grid-line': '#2200EE25',
+                        'accent-amber': '#D97706',
+                        'accent-red': '#DC2626'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Consolas', 'Courier New', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Site-Exclusive Cursor Base Style */
+        * {
+            cursor: none !important; /* Hide default system mouse cursor everywhere on site */
+        }
+
+        body {
+            background-color: #F4F4F6;
+            color: #0A0A0C;
+            background-image: 
+                radial-gradient(#2200EE 0.75px, transparent 0.75px),
+                linear-gradient(to right, rgba(34, 0, 238, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(34, 0, 238, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px, 40px 40px, 40px 40px;
+            background-position: 0 0, 0 0, 0 0;
+            overflow-x: hidden;
+        }
+
+        /* Site-Exclusive Brutalist Hand-Drawn Cursor Overlay */
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(0, 0);
+            transition: transform 0.05s ease-out;
+            filter: drop-shadow(2px 3px 0px rgba(10, 10, 12, 0.6));
+        }
+
+        .border-brutal {
+            border: 2px solid #0A0A0C;
+        }
+        .border-brutal-cobalt {
+            border: 2px solid #2200EE;
+        }
+        .shadow-brutal {
+            box-shadow: 5px 5px 0px #0A0A0C;
+        }
+        .shadow-brutal-cobalt {
+            box-shadow: 5px 5px 0px #2200EE;
+        }
+        
+        .halftone-overlay {
+            background-image: radial-gradient(#2200EE 1.5px, transparent 1.5px);
+            background-size: 8px 8px;
+        }
+
+        .btn-brutal {
+            transition: all 0.15s cubic-bezier(0,0,0.2,1);
+        }
+        .btn-brutal:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #0A0A0C;
+        }
+        .btn-brutal:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #0A0A0C;
+        }
+
+        .btn-brutal-cobalt {
+            transition: all 0.15s cubic-bezier(0,0,0.2,1);
+        }
+        .btn-brutal-cobalt:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #2200EE;
+        }
+        .btn-brutal-cobalt:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #2200EE;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4F4F6;
+            border-left: 2px solid #0A0A0C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0A0A0C;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2200EE;
+        }
+
+        /* Pulse animation for map markers */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 0.2; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .marker-pulse {
+            animation: pulse-ring 2s infinite ease-in-out;
+        }
+
+        /* Interactive Cursor Ripple Effect Overlay Canvas */
+        #ripple-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col justify-between relative selection:bg-cobalt selection:text-white">
+
+    <!-- Exclusive Hand-Drawn Brutalist Cursor Pointer Element (Matching Image Specs) -->
+    <div id="custom-cursor">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Thick Outer Black Stroke Path for Brutalist Outline -->
+            <path d="M 3 3 L 26 15 L 16 19 L 12 28 Z" fill="#D4D4D8" stroke="#0A0A0C" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Inner Light-Gray Fill Layer -->
+            <path d="M 4.5 4.5 L 23.5 14.5 L 15 18 L 11.5 25.5 Z" fill="#E4E4E7"/>
+        </svg>
+    </div>
+
+    <!-- Mouse Interaction Wave Ripple Canvas -->
+    <canvas id="ripple-canvas"></canvas>
+
+    <!-- Sticky Technical Header -->
+    <header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b-2 border-ink px-4 py-3">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-cobalt text-white font-mono text-xs font-bold px-2 py-1 border-brutal border-ink">
+                    GRID 0637:1007:1032
+                </div>
+                <h1 class="font-bold text-lg md:text-xl tracking-wider text-ink flex items-center gap-2">
+                    <span class="inline-block w-3 h-3 bg-cobalt"></span>
+                    晋药灵枢 <span class="text-xs font-mono border-l border-ink pl-2 text-cobalt font-bold">HERB PHARMACOPEIA</span>
+                </h1>
+            </div>
+
+            <!-- Navigation Bar -->
+            <nav class="hidden md:flex items-center gap-1 font-mono text-xs">
+                <button onclick="switchTab('portal')" id="nav-portal" class="nav-btn px-3 py-1.5 border-brutal bg-cobalt text-white font-bold">01.入口</button>
+                <button onclick="switchTab('map')" id="nav-map" class="nav-btn px-3 py-1.5 border-brutal bg-paper hover:bg-cobalt-light text-ink">02.地貌与产地</button>
+                <button onclick="switchTab('diag')" id="nav-diag" class="nav-btn px-3 py-1.5 border-brutal bg-paper hover:bg-cobalt-light text-ink">03.四诊问诊</button>
+                <button onclick="switchTab('synergy')" id="nav-synergy" class="nav-btn px-3 py-1.5 border-brutal bg-paper hover:bg-cobalt-light text-ink">04.君臣佐使</button>
+                <button onclick="switchTab('process')" id="nav-process" class="nav-btn px-3 py-1.5 border-brutal bg-paper hover:bg-cobalt-light text-ink">05.炮制工坊</button>
+                <button onclick="switchTab('recipe')" id="nav-recipe" class="nav-btn px-3 py-1.5 border-brutal bg-paper hover:bg-cobalt-light text-ink">06.方子生成</button>
+            </nav>
+
+            <!-- Mobile menu button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden border-brutal p-2 bg-paper text-ink">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t-2 border-ink mt-3 pt-3 grid grid-cols-2 gap-2 font-mono text-xs">
+            <button onclick="switchTab('portal')" class="p-2 text-left border-brutal bg-cobalt text-white">01.入口首页</button>
+            <button onclick="switchTab('map')" class="p-2 text-left border-brutal bg-paper">02.地貌产地</button>
+            <button onclick="switchTab('diag')" class="p-2 text-left border-brutal bg-paper">03.四诊问诊</button>
+            <button onclick="switchTab('synergy')" class="p-2 text-left border-brutal bg-paper">04.君臣佐使</button>
+            <button onclick="switchTab('process')" class="p-2 text-left border-brutal bg-paper">05.炮制工坊</button>
+            <button onclick="switchTab('recipe')" class="p-2 text-left border-brutal bg-paper">06.方子生成</button>
+        </div>
+    </header>
+
+    <!-- Global Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto w-full px-4 py-8 flex-1">
+
+        <!-- SECTION 1: 前端页 / 入口页 -->
+        <section id="sec-portal" class="tab-content space-y-8">
+            <!-- Hero Matrix Title Banner -->
+            <div class="relative border-brutal bg-paper p-6 md:p-12 shadow-brutal overflow-hidden">
+                <div class="absolute right-0 top-0 w-1/3 h-full halftone-overlay opacity-20 pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative z-10">
+                    <div>
+                        <div class="inline-block bg-cobalt text-white font-mono text-xs px-2 py-1 mb-4 font-bold">
+                            SYS.VER 3.8.0 // SHANXI TCM ARCHIVE
+                        </div>
+                        <h2 class="text-4xl md:text-7xl font-extrabold text-ink tracking-tight leading-none mb-4">
+                            晋药灵枢<br>
+                            <span class="text-cobalt">三味本草 · 生制之间</span>
+                        </h2>
+                        <p class="text-base md:text-lg text-ink font-mono max-w-2xl border-l-4 border-cobalt pl-4">
+                            探索山西太行与恒山之地的药道玄妙。以黄芪、党参、柴胡三味地道药材为核心，整合四诊辩证、君臣佐使配伍与九蒸八炮之法。
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                        <button onclick="switchTab('map')" class="btn-brutal-cobalt bg-cobalt text-white font-bold px-6 py-4 border-brutal-cobalt flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-map-location-dot"></i> 探索产地地图
+                        </button>
+                        <button onclick="switchTab('diag')" class="btn-brutal bg-paper text-ink font-bold px-6 py-4 border-brutal flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-user-doctor"></i> 直接问诊配方
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Core Herbs Showcase Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Herb Card: Huangqi -->
+                <div class="border-brutal bg-white p-6 shadow-brutal relative group hover:border-cobalt transition-colors">
+                    <div class="font-mono text-xs text-cobalt font-bold mb-2">COORD: 39.65°N 113.71°E // 恒山浑源</div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-black">黄芪</h3>
+                        <span class="bg-cobalt-light text-cobalt border border-cobalt text-xs font-bold px-2 py-0.5">补气之长</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-4 h-16">
+                        产于山西浑源大恒山地区，野生黄芪根深质实，补气升阳、固表止汗、托毒生肌之圣药。
+                    </p>
+                    <div class="border-t border-dashed border-ink/30 pt-4 flex justify-between items-center font-mono text-xs">
+                        <span>性味: 甘，微温</span>
+                        <button onclick="quickInspectHerb('huangqi')" class="text-cobalt underline font-bold hover:text-ink">查看药典 →</button>
+                    </div>
+                </div>
+
+                <!-- Herb Card: Dangshen -->
+                <div class="border-brutal bg-white p-6 shadow-brutal relative group hover:border-cobalt transition-colors">
+                    <div class="font-mono text-xs text-cobalt font-bold mb-2">COORD: 36.00°N 113.44°E // 上党平顺</div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-black">党参</h3>
+                        <span class="bg-cobalt-light text-cobalt border border-cobalt text-xs font-bold px-2 py-0.5">健脾益肺</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-4 h-16">
+                        山西长治平顺地道“潞党参”，条粗皮紧、狮子盘头，具有补中益气、健脾益肺之功效。
+                    </p>
+                    <div class="border-t border-dashed border-ink/30 pt-4 flex justify-between items-center font-mono text-xs">
+                        <span>性味: 甘，平</span>
+                        <button onclick="quickInspectHerb('dangshen')" class="text-cobalt underline font-bold hover:text-ink">查看药典 →</button>
+                    </div>
+                </div>
+
+                <!-- Herb Card: Chaihu -->
+                <div class="border-brutal bg-white p-6 shadow-brutal relative group hover:border-cobalt transition-colors">
+                    <div class="font-mono text-xs text-cobalt font-bold mb-2">COORD: 34.80°N 111.20°E // 中条山运城</div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-black">柴胡</h3>
+                        <span class="bg-cobalt-light text-cobalt border border-cobalt text-xs font-bold px-2 py-0.5">疏肝解郁</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-4 h-16">
+                        产于运城中条山脉，品质特优。能透表退热、疏肝解郁、升举阳气，为治少阳证之要药。
+                    </p>
+                    <div class="border-t border-dashed border-ink/30 pt-4 flex justify-between items-center font-mono text-xs">
+                        <span>性味: 苦、辛，微寒</span>
+                        <button onclick="quickInspectHerb('chaihu')" class="text-cobalt underline font-bold hover:text-ink">查看药典 →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflow Visual Quickstep -->
+            <div class="border-brutal bg-cobalt text-white p-6 shadow-brutal">
+                <h3 class="font-mono text-sm uppercase tracking-wider mb-4 border-b border-white/20 pb-2">
+                    <i class="fa-solid fa-network-wired"></i> 诊断与炼制完整全路径
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center font-mono text-xs">
+                    <div class="bg-white/10 p-3 border border-white/30">
+                        <div class="text-lg font-bold">01. 地理选材</div>
+                        <div class="opacity-80 mt-1">山西地道产地溯源</div>
+                    </div>
+                    <div class="bg-white/10 p-3 border border-white/30">
+                        <div class="text-lg font-bold">02. 四诊问诊</div>
+                        <div class="opacity-80 mt-1">望闻问切症型判断</div>
+                    </div>
+                    <div class="bg-white/10 p-3 border border-white/30">
+                        <div class="text-lg font-bold">03. 君臣佐使</div>
+                        <div class="opacity-80 mt-1">剂量比例雷达演算</div>
+                    </div>
+                    <div class="bg-white/10 p-3 border border-white/30">
+                        <div class="text-lg font-bold">04. 炮制转化</div>
+                        <div class="opacity-80 mt-1">蜜炙/醋淬/酒炒/炭化</div>
+                    </div>
+                    <div class="bg-white/10 p-3 border border-white/30 col-span-2 md:col-span-1">
+                        <div class="text-lg font-bold">05. 医案生成</div>
+                        <div class="opacity-80 mt-1">完整方子卷轴输出</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: 首页 (山西地貌与三株草药产地) -->
+        <section id="sec-map" class="tab-content hidden space-y-6">
+            <div class="border-brutal bg-paper p-4 md:p-6 shadow-brutal flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-black text-ink">山西地貌与地道三草产地</h2>
+                    <p class="text-xs font-mono text-cobalt font-bold">ISOMETRIC SHANXI GEOGRAPHY MATRIX // TOPOGRAPHY & HERBAL ORIGIN</p>
+                </div>
+                <div class="hidden sm:block text-right font-mono text-xs">
+                    <div>TERRAIN: HIGH MOUNTAIN & LOESS PLATEAU</div>
+                    <div class="text-cobalt font-bold">SELECT HERB TO INSPECT ORIGIN</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Interactive Canvas Terrain Map -->
+                <div class="lg:col-span-2 border-brutal bg-white p-4 shadow-brutal relative min-h-[420px] flex flex-col justify-between">
+                    <div class="absolute top-4 left-4 z-10 bg-paper/90 border-brutal p-2 text-xs font-mono">
+                        <div><i class="fa-solid fa-compass text-cobalt"></i> SHANXI REALM MAP</div>
+                        <div class="text-gray-500 text-[10px]">Click pin to switch herb context</div>
+                    </div>
+
+                    <!-- Canvas Interactive Map -->
+                    <div class="relative w-full h-[360px] bg-paper border border-ink overflow-hidden my-auto" id="map-container">
+                        <canvas id="shanxi-map-canvas" class="w-full h-full block"></canvas>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 justify-between items-center pt-2 font-mono text-xs border-t border-ink">
+                        <div class="flex gap-4">
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-amber-500 inline-block border border-ink"></span> 恒山-黄芪</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-red-500 inline-block border border-ink"></span> 长治-党参</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-blue-600 inline-block border border-ink"></span> 运城-柴胡</span>
+                        </div>
+                        <span class="text-gray-500 text-[10px]">GPS REF: 37.8707° N, 112.5489° E</span>
+                    </div>
+                </div>
+
+                <!-- Active Location / Herb Inspector Panel -->
+                <div class="border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between">
+                    <div>
+                        <div class="bg-cobalt text-white font-mono text-xs px-2 py-1 inline-block font-bold mb-3" id="herb-origin-badge">
+                            ORIGIN: 大同浑源 / 恒山山脉
+                        </div>
+                        <h3 class="text-3xl font-black text-ink mb-1" id="herb-detail-title">正宗正北黄芪</h3>
+                        <div class="font-mono text-xs text-cobalt font-bold mb-4" id="herb-detail-coord">GEO: 39.65°N 113.71°E | ALT: 1800m</div>
+
+                        <div class="space-y-3 text-sm text-gray-800">
+                            <div class="border-l-2 border-ink pl-3">
+                                <strong class="font-bold text-xs font-mono block text-cobalt">地理生态特征:</strong>
+                                <p id="herb-detail-geo" class="text-xs">恒山干旱少雨，昼夜温差大，高寒土质疏松，野生生长周期长达5-8年，积累了极高含量的黄芪甲苷与多糖。</p>
+                            </div>
+                            <div class="border-l-2 border-ink pl-3">
+                                <strong class="font-bold text-xs font-mono block text-cobalt">核心药用效能:</strong>
+                                <p id="herb-detail-effect" class="text-xs">性微温，味甘。补气升阳，固表止汗，托毒生肌，利水消肿。为中药补气第一圣药。</p>
+                            </div>
+                            <div class="border-l-2 border-ink pl-3">
+                                <strong class="font-bold text-xs font-mono block text-cobalt">典型炮制需求:</strong>
+                                <p id="herb-detail-proc" class="text-xs">生用偏于固表托毒，蜜炙（蜜黄芪）则大幅增强补中益气、润肺止咳之功。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-ink flex flex-col gap-2 mt-4">
+                        <button onclick="applyHerbToSynergy('huangqi')" class="btn-brutal-cobalt bg-cobalt text-white font-bold p-3 text-center border-brutal-cobalt text-xs font-mono">
+                            <i class="fa-solid fa-plus-circle"></i> 将此草药选入当前配方
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Floating Action Bar -->
+            <div class="border-brutal bg-paper p-4 shadow-brutal flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-3 h-3 bg-cobalt animate-ping"></span>
+                    <p class="font-mono text-xs text-ink">
+                        已选择草药基质: <strong id="selected-herbs-summary" class="text-cobalt">山西黄芪 + 潞党参 + 银柴胡</strong>
+                    </p>
+                </div>
+                <div class="flex gap-3 w-full sm:w-auto">
+                    <button onclick="switchTab('diag')" class="btn-brutal bg-white text-ink border-brutal font-bold px-5 py-2.5 text-xs font-mono flex-1 sm:flex-none">
+                        <i class="fa-solid fa-clipboard-user"></i> 前往问诊
+                    </button>
+                    <button onclick="switchTab('synergy')" class="btn-brutal-cobalt bg-cobalt text-white border-brutal-cobalt font-bold px-5 py-2.5 text-xs font-mono flex-1 sm:flex-none">
+                        <i class="fa-solid fa-sliders"></i> 开始配伍
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: 问诊 (4-Diagnostics Clinical Matrix - 望闻问切) -->
+        <section id="sec-diag" class="tab-content hidden space-y-6">
+            <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-black">四诊辩证临床矩阵</h2>
+                    <p class="text-xs font-mono text-cobalt font-bold">FOUR-DIAGNOSTIC CLINICAL MATRIX // TONGUE, PULSE & SYMPTOM ANALYSIS</p>
+                </div>
+                <button onclick="resetDiagnosis()" class="btn-brutal bg-white text-ink border-brutal px-3 py-1 font-mono text-xs">
+                    <i class="fa-solid fa-rotate-right"></i> 重置选项
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Left 2 Columns: Diagnostics Questions Checklist -->
+                <div class="md:col-span-2 space-y-6">
+                    
+                    <!-- 望诊: Tongue Diagnosis -->
+                    <div class="border-brutal bg-white p-5 shadow-brutal">
+                        <h3 class="font-bold text-lg mb-3 flex items-center gap-2 border-b border-ink pb-2">
+                            <span class="bg-cobalt text-white text-xs px-2 py-0.5 font-mono">01</span> 望诊 (舌象特征)
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs">
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="radio" name="tongue" value="pale_fat" onchange="calcDiagnosis()" class="accent-cobalt">
+                                <span>舌淡苔白 / 边有齿痕</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="radio" name="tongue" value="red_thin" onchange="calcDiagnosis()" class="accent-cobalt">
+                                <span>舌红少苔 / 脉细数</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="radio" name="tongue" value="purple_stagnant" onchange="calcDiagnosis()" class="accent-cobalt">
+                                <span>舌暗紫或有斑点</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 切诊: Pulse Condition -->
+                    <div class="border-brutal bg-white p-5 shadow-brutal">
+                        <h3 class="font-bold text-lg mb-3 flex items-center gap-2 border-b border-ink pb-2">
+                            <span class="bg-cobalt text-white text-xs px-2 py-0.5 font-mono">02</span> 切诊 (脉象特征)
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs">
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="radio" name="pulse" value="weak_slow" onchange="calcDiagnosis()" class="accent-cobalt">
+                                <span>脉虚细 / 无力</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="radio" name="pulse" value="string_taut" onchange="calcDiagnosis()" class="accent-cobalt">
+                                <span>脉弦 / 肝郁</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="radio" name="pulse" value="sunken_weak" onchange="calcDiagnosis()" class="accent-cobalt">
+                                <span>脉沉迟 / 中气不足</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问诊: Symptom Select Matrix -->
+                    <div class="border-brutal bg-white p-5 shadow-brutal">
+                        <h3 class="font-bold text-lg mb-3 flex items-center gap-2 border-b border-ink pb-2">
+                            <span class="bg-cobalt text-white text-xs px-2 py-0.5 font-mono">03</span> 问诊与闻诊 (多选临床表现)
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs">
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="checkbox" value="fatigue" onchange="calcDiagnosis()" class="diag-sym accent-cobalt">
+                                <span>少气懒言 / 容易疲劳</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="checkbox" value="sweat" onchange="calcDiagnosis()" class="diag-sym accent-cobalt">
+                                <span>自汗盗汗 / 易感冒</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="checkbox" value="stomach" onchange="calcDiagnosis()" class="diag-sym accent-cobalt">
+                                <span>食少腹胀 / 便溏</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="checkbox" value="mood" onchange="calcDiagnosis()" class="diag-sym accent-cobalt">
+                                <span>情绪抑郁 / 肋胁胀痛</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="checkbox" value="fever" onchange="calcDiagnosis()" class="diag-sym accent-cobalt">
+                                <span>往来寒热 / 口苦目眩</span>
+                            </label>
+                            <label class="border-brutal p-3 flex items-center gap-2 bg-paper hover:bg-cobalt-light">
+                                <input type="checkbox" value="prolapse" onchange="calcDiagnosis()" class="diag-sym accent-cobalt">
+                                <span>内脏下垂 / 胃下垂感</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Real-time Syndrome Resolution Output -->
+                <div class="border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between">
+                    <div>
+                        <div class="border-b-2 border-ink pb-3 mb-4">
+                            <span class="text-xs font-mono text-cobalt font-bold">REALTIME SYNDROME ANALYSIS</span>
+                            <h3 class="text-2xl font-black text-ink mt-1" id="syndrome-name">脾胃气虚证</h3>
+                        </div>
+
+                        <div class="space-y-4 font-mono text-xs">
+                            <div class="bg-paper p-3 border-brutal">
+                                <div class="text-gray-500 mb-1">证型判定匹配度:</div>
+                                <div class="w-full bg-gray-200 h-3 border border-ink overflow-hidden">
+                                    <div id="syndrome-match-bar" class="bg-cobalt h-full w-3/4"></div>
+                                </div>
+                                <div class="text-right text-[10px] text-cobalt font-bold mt-1" id="syndrome-match-text">85% Confidence</div>
+                            </div>
+
+                            <div class="border-l-2 border-cobalt pl-3">
+                                <strong class="text-ink font-bold block mb-1">病理病机分析:</strong>
+                                <p id="syndrome-desc" class="text-gray-700 leading-relaxed">
+                                    脾胃为后天之本，中气不足则神疲乏力、食少便溏。治宜大补元气、健脾升阳。
+                                </p>
+                            </div>
+
+                            <div class="border-l-2 border-ink pl-3">
+                                <strong class="text-ink font-bold block mb-1">推荐治法与配伍倾向:</strong>
+                                <p id="syndrome-treat" class="text-gray-700">
+                                    重用山西黄芪为君以补气升阳，辅以党参益气健脾，柴胡少量升举清阳。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-ink mt-6 space-y-3">
+                        <button onclick="applyDiagnosticResult()" class="btn-brutal-cobalt w-full bg-cobalt text-white font-bold py-3 border-brutal-cobalt font-mono text-xs">
+                            <i class="fa-solid fa-square-check"></i> 应用诊断结果，进入君臣佐使配伍
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: 配伍 (Jun-Chen-Zuo-Shi Formula Synergy Matrix) -->
+        <section id="sec-synergy" class="tab-content hidden space-y-6">
+            <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-black">君臣佐使配伍演化矩阵</h2>
+                    <p class="text-xs font-mono text-cobalt font-bold">HERBAL DOSAGE MATRIX & POTENCY BALANCER</p>
+                </div>
+                <div class="font-mono text-xs text-right">
+                    <span>总剂量: <strong id="total-dosage-disp" class="text-cobalt text-base">45</strong> 克</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left Side: Dosage Sliders -->
+                <div class="lg:col-span-7 border-brutal bg-white p-6 shadow-brutal space-y-6">
+                    <h3 class="font-bold text-lg border-b border-ink pb-2 flex justify-between items-center">
+                        <span>三味晋药 + 辅药剂量调配</span>
+                        <span class="text-xs font-mono text-gray-500">Unit: Grams (g)</span>
+                    </h3>
+
+                    <!-- Huangqi Slider -->
+                    <div class="space-y-2 border-brutal p-4 bg-paper">
+                        <div class="flex justify-between items-center font-bold">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-cobalt text-white text-xs px-2 py-0.5 font-mono">君</span>
+                                恒山黄芪 (Astragalus)
+                            </span>
+                            <span class="font-mono text-cobalt text-lg"><span id="val-huangqi">30</span> g</span>
+                        </div>
+                        <input type="range" id="slide-huangqi" min="5" max="60" value="30" oninput="updateSynergyMatrix()" class="w-full accent-cobalt">
+                        <div class="flex justify-between text-[10px] font-mono text-gray-500">
+                            <span>微量 (5g)</span>
+                            <span>补气常用 (30g)</span>
+                            <span>重用升阳 (60g)</span>
+                        </div>
+                    </div>
+
+                    <!-- Dangshen Slider -->
+                    <div class="space-y-2 border-brutal p-4 bg-paper">
+                        <div class="flex justify-between items-center font-bold">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-ink text-white text-xs px-2 py-0.5 font-mono">臣</span>
+                                上党党参 (Codonopsis)
+                            </span>
+                            <span class="font-mono text-cobalt text-lg"><span id="val-dangshen">12</span> g</span>
+                        </div>
+                        <input type="range" id="slide-dangshen" min="3" max="30" value="12" oninput="updateSynergyMatrix()" class="w-full accent-cobalt">
+                        <div class="flex justify-between text-[10px] font-mono text-gray-500">
+                            <span>辅药 (3g)</span>
+                            <span>健脾 (12g)</span>
+                            <span>强效 (30g)</span>
+                        </div>
+                    </div>
+
+                    <!-- Chaihu Slider -->
+                    <div class="space-y-2 border-brutal p-4 bg-paper">
+                        <div class="flex justify-between items-center font-bold">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-ink text-white text-xs px-2 py-0.5 font-mono">佐</span>
+                                运城柴胡 (Bupleurum)
+                            </span>
+                            <span class="font-mono text-cobalt text-lg"><span id="val-chaihu">6</span> g</span>
+                        </div>
+                        <input type="range" id="slide-chaihu" min="1" max="18" value="6" oninput="updateSynergyMatrix()" class="w-full accent-cobalt">
+                        <div class="flex justify-between text-[10px] font-mono text-gray-500">
+                            <span>引药/升阳 (3g-6g)</span>
+                            <span>疏肝 (9g)</span>
+                            <span>退热 (18g)</span>
+                        </div>
+                    </div>
+
+                    <!-- Licorice / Assistant Herb -->
+                    <div class="space-y-2 border-brutal p-4 bg-paper">
+                        <div class="flex justify-between items-center font-bold">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-gray-400 text-black text-xs px-2 py-0.5 font-mono">使</span>
+                                炙甘草 (Licorice - Harmony)
+                            </span>
+                            <span class="font-mono text-cobalt text-lg"><span id="val-licorice">5</span> g</span>
+                        </div>
+                        <input type="range" id="slide-licorice" min="2" max="15" value="5" oninput="updateSynergyMatrix()" class="w-full accent-cobalt">
+                    </div>
+                </div>
+
+                <!-- Right Side: Radar Chart Potency Analysis -->
+                <div class="lg:col-span-5 border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg border-b border-ink pb-2 mb-4">方剂效能与相畏相使评估</h3>
+                        <div class="w-full h-[280px] relative">
+                            <canvas id="synergy-radar-chart"></canvas>
+                        </div>
+
+                        <div class="mt-4 space-y-2 font-mono text-xs">
+                            <div class="flex justify-between p-2 border border-ink bg-paper">
+                                <span>补气升阳度:</span>
+                                <strong id="score-buqi" class="text-cobalt">88/100</strong>
+                            </div>
+                            <div class="flex justify-between p-2 border border-ink bg-paper">
+                                <span>疏肝理气度:</span>
+                                <strong id="score-shugan" class="text-cobalt">42/100</strong>
+                            </div>
+                            <div class="flex justify-between p-2 border border-ink bg-paper">
+                                <span>燥烈抑制/调和度:</span>
+                                <strong id="score-tiaohe" class="text-cobalt">92/100</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-ink mt-4 flex gap-3">
+                        <button onclick="switchTab('process')" class="btn-brutal-cobalt w-full bg-cobalt text-white font-bold py-3 border-brutal-cobalt text-xs font-mono">
+                            下一步：进入炮制工坊转化 <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: 炮制 (Processing Laboratory - 九蒸八炮动画实验室) -->
+        <section id="sec-process" class="tab-content hidden space-y-6">
+            <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-black">九蒸八炮 · 炮制模拟实验室</h2>
+                    <p class="text-xs font-mono text-cobalt font-bold">ALCHEMICAL PROCESSING SIMULATION // FIRE & LIQUID TRANSFORMATIONS</p>
+                </div>
+                <div class="font-mono text-xs bg-cobalt text-white px-3 py-1 border-brutal font-bold">
+                    HERBAL REACTION SIMULATOR ACTIVE
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Method Selection Bar & Controls -->
+                <div class="lg:col-span-4 border-brutal bg-white p-6 shadow-brutal space-y-6">
+                    <h3 class="font-bold text-lg border-b border-ink pb-2">选择炮制工艺 (Processing Method)</h3>
+
+                    <div class="space-y-3 font-mono text-xs">
+                        <!-- Honey Roasting -->
+                        <button onclick="setProcessMethod('honey')" id="btn-proc-honey" class="proc-btn border-brutal w-full p-3 text-left bg-cobalt text-white font-bold transition-all">
+                            <div class="flex justify-between items-center">
+                                <span>01. 蜜炙 (Honey Roasting)</span>
+                                <i class="fa-solid fa-jar text-amber-300"></i>
+                            </div>
+                            <div class="text-[10px] opacity-80 mt-1">适合: 黄芪 / 增强润肺补中作用</div>
+                        </button>
+
+                        <!-- Vinegar Quenching -->
+                        <button onclick="setProcessMethod('vinegar')" id="btn-proc-vinegar" class="proc-btn border-brutal w-full p-3 text-left bg-paper text-ink transition-all">
+                            <div class="flex justify-between items-center">
+                                <span>02. 醋淬 (Vinegar Quenching)</span>
+                                <i class="fa-solid fa-flask text-cobalt"></i>
+                            </div>
+                            <div class="text-[10px] text-gray-600 mt-1">适合: 柴胡 / 引药入肝，增强疏肝止痛</div>
+                        </button>
+
+                        <!-- Wine Stirring -->
+                        <button onclick="setProcessMethod('wine')" id="btn-proc-wine" class="proc-btn border-brutal w-full p-3 text-left bg-paper text-ink transition-all">
+                            <div class="flex justify-between items-center">
+                                <span>03. 酒炒 (Wine Stir-frying)</span>
+                                <i class="fa-solid fa-wine-bottle text-red-600"></i>
+                            </div>
+                            <div class="text-[10px] text-gray-600 mt-1">适合: 党参 / 活血通络，升提药力</div>
+                        </button>
+
+                        <!-- Charcoal Baking -->
+                        <button onclick="setProcessMethod('charcoal')" id="btn-proc-charcoal" class="proc-btn border-brutal w-full p-3 text-left bg-paper text-ink transition-all">
+                            <div class="flex justify-between items-center">
+                                <span>04. 炒炭 (Charcoal Carbonization)</span>
+                                <i class="fa-solid fa-fire text-orange-600"></i>
+                            </div>
+                            <div class="text-[10px] text-gray-600 mt-1">适合: 止血固涩，性味转为苦温收敛</div>
+                        </button>
+                    </div>
+
+                    <!-- Temperature & Intensity Slider -->
+                    <div class="border-brutal p-4 bg-paper space-y-3">
+                        <div class="flex justify-between items-center font-bold text-xs font-mono">
+                            <span>炮制火力 (Heat Temp):</span>
+                            <span class="text-cobalt text-base" id="temp-display">180 °C</span>
+                        </div>
+                        <input type="range" id="slide-temp" min="80" max="350" value="180" oninput="updateProcessPhysics()" class="w-full accent-cobalt">
+                        <div class="flex justify-between text-[10px] font-mono text-gray-500">
+                            <span>文火 (80°C)</span>
+                            <span>武火 (220°C)</span>
+                            <span>炭化 (350°C)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processing Animation Canvas Simulation -->
+                <div class="lg:col-span-8 border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between relative min-h-[400px]">
+                    <div class="flex justify-between items-center border-b border-ink pb-2 mb-4 font-mono text-xs">
+                        <span class="font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-microscope text-cobalt"></i>
+                            实时微观反应器: <span id="proc-canvas-title" class="text-cobalt uppercase">蜜炙 (Honey Roasting)</span>
+                        </span>
+                        <span class="text-gray-500">HERB SLICE & CHEMICAL DYNAMICS</span>
+                    </div>
+
+                    <!-- Canvas Animation Viewport -->
+                    <div class="relative w-full h-[280px] bg-ink border-2 border-ink overflow-hidden my-auto" id="process-canvas-container">
+                        <canvas id="process-canvas" class="w-full h-full block"></canvas>
+                        
+                        <!-- Overlay parameters readout -->
+                        <div class="absolute bottom-3 left-3 bg-paper/90 border-brutal px-3 py-1 font-mono text-[11px] space-y-0.5">
+                            <div>活性成分存留: <strong id="chem-active-ret" class="text-cobalt">94.2%</strong></div>
+                            <div>毒性/燥烈度: <strong id="chem-toxicity" class="text-red-600">-38.0%</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Action Step -->
+                    <div class="pt-4 border-t border-ink flex justify-between items-center gap-4 mt-4">
+                        <p class="font-mono text-xs text-gray-600">
+                            炮制转化完成。药力已由生用转为定制药效。
+                        </p>
+                        <button onclick="switchTab('recipe')" class="btn-brutal-cobalt bg-cobalt text-white font-bold px-6 py-2.5 border-brutal-cobalt font-mono text-xs whitespace-nowrap">
+                            生成最终医案方卷 <i class="fa-solid fa-scroll"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: 方子生成 (Prescription Dossier Scroll) -->
+        <section id="sec-recipe" class="tab-content hidden space-y-6">
+            <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-black">晋药灵枢 · 最终处方医案卷轴</h2>
+                    <p class="text-xs font-mono text-cobalt font-bold">PRESCRIPTION DOSSIER & HERBAL SPECIFICATION SCROLL</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="printPrescription()" class="btn-brutal bg-white text-ink border-brutal px-4 py-2 text-xs font-mono font-bold">
+                        <i class="fa-solid fa-print"></i> 打印/导出医案
+                    </button>
+                    <button onclick="switchTab('diag')" class="btn-brutal-cobalt bg-cobalt text-white border-brutal-cobalt px-4 py-2 text-xs font-mono font-bold">
+                        <i class="fa-solid fa-rotate"></i> 回到问诊 (重新辩证)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Authentic Brutalist Prescription Document -->
+            <div class="border-2 border-ink bg-white p-8 md:p-12 shadow-brutal max-w-4xl mx-auto space-y-8 relative overflow-hidden" id="printable-prescription">
+                <div class="absolute top-0 right-0 w-32 h-32 halftone-overlay opacity-10 pointer-events-none"></div>
+
+                <!-- Header Document Info -->
+                <div class="border-b-4 border-ink pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                    <div>
+                        <div class="bg-cobalt text-white font-mono text-xs px-2 py-0.5 inline-block font-bold mb-2">
+                            OFFICIAL PHARMACOPEIA RECORD // NO. 2026-JIN-0637
+                        </div>
+                        <h1 class="text-3xl md:text-4xl font-black tracking-widest text-ink">晋药灵枢 · 地道本草配伍方</h1>
+                    </div>
+                    <div class="font-mono text-xs text-right text-gray-600">
+                        <div>开方时间: <span id="recipe-date">2026-10-10</span></div>
+                        <div>产地基质: 山西全域地道采摘</div>
+                    </div>
+                </div>
+
+                <!-- Patient & Diagnostic Result Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs border-b-2 border-ink pb-6">
+                    <div class="border-brutal p-4 bg-paper">
+                        <div class="text-cobalt font-bold mb-1">[ 辩证诊断结果 ]</div>
+                        <div class="text-base font-bold text-ink mb-2" id="rec-syndrome">脾胃气虚 · 兼肝郁症</div>
+                        <p class="text-gray-700 leading-relaxed" id="rec-syndrome-detail">
+                            患者脉象虚细，舌淡有齿痕。主症见少气懒言，食少腹胀。治当大补中气，兼以疏肝解郁。
+                        </p>
+                    </div>
+
+                    <div class="border-brutal p-4 bg-paper">
+                        <div class="text-cobalt font-bold mb-1">[ 炮制法则 ]</div>
+                        <div class="text-base font-bold text-ink mb-2" id="rec-process-method">蜜炙黄芪 + 醋淬柴胡</div>
+                        <p class="text-gray-700 leading-relaxed" id="rec-process-detail">
+                            黄芪经炼蜜炒制，增强补中益气；柴胡经醋淬，引药入肝，减其升散之性，缓和燥烈。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Herbal Ingredients Breakdown Table -->
+                <div class="space-y-4">
+                    <h3 class="font-mono text-xs font-bold text-cobalt tracking-wider uppercase">
+                        [ 处方组成与君臣佐使药量 ]
+                    </h3>
+
+                    <table class="w-full text-left font-mono text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-cobalt text-white border-2 border-ink">
+                                <th class="p-3 border-r border-ink">配伍角色</th>
+                                <th class="p-3 border-r border-ink">药名</th>
+                                <th class="p-3 border-r border-ink">地道产地</th>
+                                <th class="p-3 border-r border-ink">炮制规格</th>
+                                <th class="p-3 text-right">用量 (Grams)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-ink border-2 border-ink">
+                            <tr>
+                                <td class="p-3 font-bold text-cobalt border-r border-ink">君药 (Chief)</td>
+                                <td class="p-3 font-bold text-base border-r border-ink">山西黄芪</td>
+                                <td class="p-3 border-r border-ink">恒山浑源</td>
+                                <td class="p-3 border-r border-ink" id="rec-spec-hq">蜜炙</td>
+                                <td class="p-3 text-right font-bold text-base border-r border-ink" id="rec-dose-hq">30 g</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold border-r border-ink">臣药 (Deputy)</td>
+                                <td class="p-3 font-bold text-base border-r border-ink">潞党参</td>
+                                <td class="p-3 border-r border-ink">上党平顺</td>
+                                <td class="p-3 border-r border-ink" id="rec-spec-ds">酒炒/生用</td>
+                                <td class="p-3 text-right font-bold text-base border-r border-ink" id="rec-dose-ds">12 g</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold border-r border-ink">佐药 (Assistant)</td>
+                                <td class="p-3 font-bold text-base border-r border-ink">中条山柴胡</td>
+                                <td class="p-3 border-r border-ink">运城中条山</td>
+                                <td class="p-3 border-r border-ink" id="rec-spec-ch">醋淬</td>
+                                <td class="p-3 text-right font-bold text-base border-r border-ink" id="rec-dose-ch">6 g</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold border-r border-ink text-gray-500">使药 (Envoy)</td>
+                                <td class="p-3 font-bold text-base border-r border-ink">炙甘草</td>
+                                <td class="p-3 border-r border-ink">地道统货</td>
+                                <td class="p-3 border-r border-ink">蜜炙</td>
+                                <td class="p-3 text-right font-bold text-base border-r border-ink" id="rec-dose-gc">5 g</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Authorization Stamp -->
+                <div class="pt-8 border-t-2 border-ink flex justify-between items-end font-mono text-xs">
+                    <div>
+                        <div class="text-gray-500">煎服法:</div>
+                        <div class="font-bold">水煎服，每日一剂，早晚两次温服。</div>
+                    </div>
+                    <div class="border-2 border-cobalt p-3 text-center text-cobalt bg-cobalt-light font-bold">
+                        [ 晋药灵枢 验方之印 ]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t-2 border-ink bg-paper py-6 px-4 mt-12 font-mono text-xs">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 bg-cobalt inline-block"></span>
+                <span>晋药灵枢 — 三味本草 · 生制之间 // JIN HERB PHARMACOPEIA SYSTEM</span>
+            </div>
+            <div class="text-gray-500">
+                SWISS HALFTONE MATRIX / ACID BRUTALISM INTERACTIVE EXPERIENCE
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global Application State
+        const state = {
+            currentTab: 'portal',
+            selectedHerb: 'huangqi',
+            diag: {
+                tongue: 'pale_fat',
+                pulse: 'weak_slow',
+                symptoms: ['fatigue', 'sweat']
+            },
+            synergy: {
+                huangqi: 30,
+                dangshen: 12,
+                chaihu: 6,
+                licorice: 5
+            },
+            process: {
+                method: 'honey',
+                temp: 180
+            }
+        };
+
+        // Herb Geographic Database
+        const herbData = {
+            huangqi: {
+                name: '正宗正北黄芪',
+                origin: 'ORIGIN: 大同浑源 / 恒山山脉',
+                coord: 'GEO: 39.65°N 113.71°E | ALT: 1800m',
+                geo: '恒山干旱少雨，昼夜温差大，高寒土质疏松，野生生长周期长达5-8年，积累了极高含量的黄芪甲苷与多糖。',
+                effect: '性微温，味甘。补气升阳，固表止汗，托毒生肌，利水消肿。为中药补气第一圣药。',
+                proc: '生用偏于固表托毒，蜜炙（蜜黄芪）则大幅增强补中益气、润肺止咳之功。'
+            },
+            dangshen: {
+                name: '上党地道潞党参',
+                origin: 'ORIGIN: 长治平顺 / 太行山脉',
+                coord: 'GEO: 36.00°N 113.44°E | ALT: 1200m',
+                geo: '平顺地处上党盆地边缘，四季分明，峡谷错落，土壤富含有机质，所产潞党参“狮子盘头”明显，质地柔韧。',
+                effect: '性平，味甘。补中益气，健脾益肺。用于脾肺虚弱，气短心悸，食少便溏，虚喘咳嗽。',
+                proc: '生党参益气生津；酒炒党参增强活血通络之功；米炒党参则偏于健脾止泻。'
+            },
+            chaihu: {
+                name: '运城中条山北柴胡',
+                origin: 'ORIGIN: 运城中条山 / 盐池周边',
+                coord: 'GEO: 34.80°N 111.20°E | ALT: 950m',
+                geo: '中条山光照充足，气候温凉，地道银柴胡与北柴胡根条粗壮，柴胡皂苷含量极高，透表疏肝功效卓著。',
+                effect: '性微寒，味苦、辛。和解少阳，疏肝解郁，升举阳气。主治感冒发热、寒热往来、肝郁气滞。',
+                proc: '醋柴胡引药入肝，专于疏肝止痛；酒柴胡升提阳气；生柴胡透表退热。'
+            }
+        };
+
+        // UI Toast Notification helper
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-cobalt text-white border-brutal border-ink px-4 py-2 font-mono text-xs font-bold shadow-brutal pointer-events-auto transition-all duration-300 transform translate-y-2';
+            toast.innerHTML = `<i class="fa-solid fa-circle-info mr-2"></i> ${msg}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // Custom Brutalist Cursor Positioning & Interactive Wave Ripples System
+        let ripples = [];
+        const cursorEl = document.getElementById('custom-cursor');
+        const rippleCanvas = document.getElementById('ripple-canvas');
+        let rippleCtx = null;
+
+        function setupExclusiveCursor() {
+            if (!rippleCanvas) return;
+            rippleCanvas.width = window.innerWidth;
+            rippleCanvas.height = window.innerHeight;
+            rippleCtx = rippleCanvas.getContext('2d');
+
+            window.addEventListener('mousemove', (e) => {
+                // Move custom site-exclusive cursor exactly with mouse pointer
+                cursorEl.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+
+                // Add subtle trailing ripple points on movement
+                if (Math.random() < 0.25) {
+                    ripples.push({
+                        x: e.clientX,
+                        y: e.clientY,
+                        radius: 2,
+                        maxRadius: 18,
+                        alpha: 0.6,
+                        color: '#2200EE'
+                    });
+                }
+            });
+
+            window.addEventListener('mousedown', (e) => {
+                // Trigger vivid cobalt splash wave on click
+                ripples.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    radius: 4,
+                    maxRadius: 40,
+                    alpha: 0.9,
+                    color: '#2200EE'
+                });
+            });
+
+            window.addEventListener('resize', () => {
+                rippleCanvas.width = window.innerWidth;
+                rippleCanvas.height = window.innerHeight;
+            });
+
+            function animateRipples() {
+                rippleCtx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
+                for (let i = ripples.length - 1; i >= 0; i--) {
+                    const r = ripples[i];
+                    r.radius += 1.2;
+                    r.alpha -= 0.025;
+
+                    if (r.alpha <= 0) {
+                        ripples.splice(i, 1);
+                        continue;
+                    }
+
+                    rippleCtx.beginPath();
+                    rippleCtx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+                    rippleCtx.strokeStyle = `rgba(34, 0, 238, ${r.alpha})`;
+                    rippleCtx.lineWidth = 2;
+                    rippleCtx.stroke();
+                }
+                requestAnimationFrame(animateRipples);
+            }
+            animateRipples();
+        }
+
+        // Navigation Tab Switcher
+        function switchTab(tabId) {
+            state.currentTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`sec-${tabId}`);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-cobalt', 'text-white', 'font-bold');
+                btn.classList.add('bg-paper', 'text-ink');
+            });
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('bg-cobalt', 'text-white', 'font-bold');
+                activeNav.classList.remove('bg-paper', 'text-ink');
+            }
+
+            // Trigger Canvas resizes if switching to map or process tab
+            if (tabId === 'map') renderMapCanvas();
+            if (tabId === 'process') initProcessCanvas();
+            if (tabId === 'synergy') initRadarChart();
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Herb Inspection Switcher
+        function inspectHerb(key) {
+            state.selectedHerb = key;
+            const data = herbData[key];
+            if (!data) return;
+
+            document.getElementById('herb-origin-badge').innerText = data.origin;
+            document.getElementById('herb-detail-title').innerText = data.name;
+            document.getElementById('herb-detail-coord').innerText = data.coord;
+            document.getElementById('herb-detail-geo').innerText = data.geo;
+            document.getElementById('herb-detail-effect').innerText = data.effect;
+            document.getElementById('herb-detail-proc').innerText = data.proc;
+            renderMapCanvas();
+        }
+
+        function quickInspectHerb(key) {
+            inspectHerb(key);
+            switchTab('map');
+        }
+
+        function applyHerbToSynergy(key) {
+            showToast(`已将 [${herbData[key].name}] 加入调配基质`);
+            switchTab('synergy');
+        }
+
+        // Map Canvas Renderer
+        function renderMapCanvas() {
+            const canvas = document.getElementById('shanxi-map-canvas');
+            if (!canvas) return;
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            // Clear Background
+            ctx.fillStyle = '#F4F4F6';
+            ctx.fillRect(0, 0, w, h);
+
+            // Draw Wireframe Grid Guide
+            ctx.strokeStyle = '#2200EE15';
+            ctx.lineWidth = 1;
+            const step = 20;
+            for (let x = 0; x < w; x += step) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+            }
+            for (let y = 0; y < h; y += step) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+            }
+
+            // Draw Stylized Shanxi Boundary Wireframe Contour
+            ctx.beginPath();
+            ctx.moveTo(w * 0.45, h * 0.1);
+            ctx.lineTo(w * 0.65, h * 0.2);
+            ctx.lineTo(w * 0.70, h * 0.5);
+            ctx.lineTo(w * 0.55, h * 0.85);
+            ctx.lineTo(w * 0.35, h * 0.9);
+            ctx.lineTo(w * 0.25, h * 0.6);
+            ctx.lineTo(w * 0.35, h * 0.25);
+            ctx.closePath();
+            ctx.fillStyle = '#EAE7FF';
+            ctx.fill();
+            ctx.strokeStyle = '#2200EE';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Pins Coordinates
+            const pins = {
+                huangqi: { x: w * 0.58, y: h * 0.22, name: '恒山 (黄芪)', color: '#D97706' },
+                dangshen: { x: w * 0.60, y: h * 0.58, name: '平顺 (党参)', color: '#DC2626' },
+                chaihu: { x: w * 0.38, y: h * 0.80, name: '运城 (柴胡)', color: '#2200EE' }
+            };
+
+            // Draw pins
+            Object.keys(pins).forEach(key => {
+                const p = pins[key];
+                const isSelected = (state.selectedHerb === key);
+
+                // Pulse Effect
+                if (isSelected) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 18, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + '33';
+                    ctx.fill();
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 8, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+                ctx.strokeStyle = '#0A0A0C';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Text Label
+                ctx.font = 'bold 12px JetBrains Mono, sans-serif';
+                ctx.fillStyle = '#0A0A0C';
+                ctx.fillText(p.name, p.x + 12, p.y + 4);
+            });
+
+            // Click listener on Canvas
+            canvas.onclick = function(e) {
+                const rect = canvas.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                const my = e.clientY - rect.top;
+
+                Object.keys(pins).forEach(key => {
+                    const p = pins[key];
+                    const dist = Math.hypot(mx - p.x, my - p.y);
+                    if (dist < 20) {
+                        inspectHerb(key);
+                        showToast(`已选定产地: ${p.name}`);
+                    }
+                });
+            };
+        }
+
+        // Four Diagnostics Calc Logic
+        function calcDiagnosis() {
+            const tongue = document.querySelector('input[name="tongue"]:checked')?.value || 'pale_fat';
+            const pulse = document.querySelector('input[name="pulse"]:checked')?.value || 'weak_slow';
+            const checkboxes = document.querySelectorAll('.diag-sym:checked');
+            const syms = Array.from(checkboxes).map(c => c.value);
+
+            state.diag = { tongue, pulse, symptoms: syms };
+
+            let name = "脾胃气虚证";
+            let match = "85%";
+            let desc = "脾胃为后天之本，中气不足则神疲乏力、食少便溏。治宜大补元气、健脾升阳。";
+            let treat = "重用山西黄芪为君以补气升阳，辅以党参益气健脾，柴胡少量升举清阳。";
+
+            if (pulse === 'string_taut' || syms.includes('mood')) {
+                name = "肝郁脾虚证";
+                match = "92%";
+                desc = "肝气郁结则情绪低落、肋胁胀痛，木旺克土导致脾胃运化失常。治当疏肝解郁，健脾补气。";
+                treat = "增加运城柴胡用量为君以疏肝，佐以山西黄芪、党参培土生金。";
+            } else if (syms.includes('prolapse') || tongue === 'pale_fat') {
+                name = "中气下陷证";
+                match = "96%";
+                desc = "脾胃气虚极甚，清阳不升，导致脏器下垂、久泻脱肛。治宜大剂补气升提。";
+                treat = "重用山西黄芪（45g以上）配合柴胡少许（升麻之意），升举下陷之清阳。";
+            }
+
+            document.getElementById('syndrome-name').innerText = name;
+            document.getElementById('syndrome-match-bar').style.width = match;
+            document.getElementById('syndrome-match-text').innerText = `${match} Confidence`;
+            document.getElementById('syndrome-desc').innerText = desc;
+            document.getElementById('syndrome-treat').innerText = treat;
+        }
+
+        function resetDiagnosis() {
+            document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(i => i.checked = false);
+            calcDiagnosis();
+            showToast("已重置问诊选项");
+        }
+
+        function applyDiagnosticResult() {
+            const syndrome = document.getElementById('syndrome-name').innerText;
+            if (syndrome.includes("肝郁")) {
+                state.synergy.chaihu = 12;
+                state.synergy.huangqi = 20;
+            } else if (syndrome.includes("下陷")) {
+                state.synergy.huangqi = 45;
+                state.synergy.chaihu = 6;
+            } else {
+                state.synergy.huangqi = 30;
+                state.synergy.dangshen = 15;
+            }
+            document.getElementById('slide-huangqi').value = state.synergy.huangqi;
+            document.getElementById('slide-dangshen').value = state.synergy.dangshen;
+            document.getElementById('slide-chaihu').value = state.synergy.chaihu;
+
+            showToast("已根据辩证自动设定最佳君臣佐使比例");
+            switchTab('synergy');
+        }
+
+        let radarChartInstance = null;
+
+        function initRadarChart() {
+            const ctx = document.getElementById('synergy-radar-chart');
+            if (!ctx) return;
+
+            if (radarChartInstance) {
+                radarChartInstance.destroy();
+            }
+
+            radarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['补气升阳', '健脾和胃', '疏肝解郁', '固表止汗', '毒性抑制', '药性调和'],
+                    datasets: [{
+                        label: '方剂综合效能',
+                        data: [85, 75, 45, 90, 95, 88],
+                        backgroundColor: 'rgba(34, 0, 238, 0.25)',
+                        borderColor: '#2200EE',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#0A0A0C'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#2200EE25' },
+                            grid: { color: '#2200EE25' },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            updateSynergyMatrix();
+        }
+
+        function updateSynergyMatrix() {
+            const hq = parseInt(document.getElementById('slide-huangqi').value);
+            const ds = parseInt(document.getElementById('slide-dangshen').value);
+            const ch = parseInt(document.getElementById('slide-chaihu').value);
+            const gc = parseInt(document.getElementById('slide-licorice').value);
+
+            state.synergy = { huangqi: hq, dangshen: ds, chaihu: ch, licorice: gc };
+
+            document.getElementById('val-huangqi').innerText = hq;
+            document.getElementById('val-dangshen').innerText = ds;
+            document.getElementById('val-chaihu').innerText = ch;
+            document.getElementById('val-licorice').innerText = gc;
+
+            const total = hq + ds + ch + gc;
+            document.getElementById('total-dosage-disp').innerText = total;
+
+            // Recalculate radar points
+            const buqi = Math.min(100, Math.round((hq * 1.5 + ds * 1.2)));
+            const shugan = Math.min(100, Math.round(ch * 5.5));
+            const tiaohe = Math.min(100, Math.round(gc * 15 + ds * 1.5));
+
+            document.getElementById('score-buqi').innerText = `${buqi}/100`;
+            document.getElementById('score-shugan').innerText = `${shugan}/100`;
+            document.getElementById('score-tiaohe').innerText = `${tiaohe}/100`;
+
+            if (radarChartInstance) {
+                radarChartInstance.data.datasets[0].data = [
+                    buqi,
+                    Math.min(100, ds * 4),
+                    shugan,
+                    Math.min(100, hq * 1.8),
+                    Math.min(100, 70 + gc * 4),
+                    tiaohe
+                ];
+                radarChartInstance.update();
+            }
+
+            // Sync with Prescription Scroll Page
+            document.getElementById('rec-dose-hq').innerText = `${hq} g`;
+            document.getElementById('rec-dose-ds').innerText = `${ds} g`;
+            document.getElementById('rec-dose-ch').innerText = `${ch} g`;
+            document.getElementById('rec-dose-gc').innerText = `${gc} g`;
+        }
+
+        // Advanced Processing Simulation Canvas (Distinct Visual Mechanics for Each Method)
+        let processAnimId = null;
+        let procParticles = [];
+        let animTick = 0;
+
+        function setProcessMethod(method) {
+            state.process.method = method;
+            document.querySelectorAll('.proc-btn').forEach(btn => {
+                btn.classList.remove('bg-cobalt', 'text-white');
+                btn.classList.add('bg-paper', 'text-ink');
+            });
+            const activeBtn = document.getElementById(`btn-proc-${method}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-cobalt', 'text-white');
+                activeBtn.classList.remove('bg-paper', 'text-ink');
+            }
+
+            const titles = {
+                honey: '蜜炙 (Honey Roasting)',
+                vinegar: '醋淬 (Vinegar Quenching)',
+                wine: '酒炒 (Wine Stir-frying)',
+                charcoal: '炒炭 (Charcoal Carbonization)'
+            };
+            document.getElementById('proc-canvas-title').innerText = titles[method];
+
+            // Update prescription table specs
+            const specs = { honey: '蜜炙', vinegar: '醋淬', wine: '酒炒', charcoal: '炒炭' };
+            document.getElementById('rec-spec-hq').innerText = specs[method];
+
+            showToast(`调整炮制工艺为: ${titles[method]}`);
+            initProcessCanvas();
+        }
+
+        function updateProcessPhysics() {
+            const temp = document.getElementById('slide-temp').value;
+            state.process.temp = temp;
+            document.getElementById('temp-display').innerText = `${temp} °C`;
+
+            const ret = Math.max(60, (100 - (temp - 100) * 0.12)).toFixed(1);
+            const tox = (-20 - (temp - 100) * 0.25).toFixed(1);
+
+            document.getElementById('chem-active-ret').innerText = `${ret}%`;
+            document.getElementById('chem-toxicity').innerText = `${tox}%`;
+        }
+
+        function initProcessCanvas() {
+            const canvas = document.getElementById('process-canvas');
+            if (!canvas) return;
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            procParticles = [];
+            const method = state.process.method;
+
+            // Generate particles suited for specific alchemical visual
+            const particleCount = method === 'vinegar' ? 120 : (method === 'charcoal' ? 80 : 70);
+            for (let i = 0; i < particleCount; i++) {
+                procParticles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    radius: Math.random() * 6 + 2,
+                    life: Math.random(),
+                    color: '#2200EE'
+                });
+            }
+
+            if (processAnimId) cancelAnimationFrame(processAnimId);
+
+            function drawHerbCrossSection(cx, cy, radius, method, temp) {
+                ctx.save();
+                ctx.translate(cx, cy);
+
+                // Base Herb Oval Slice Body
+                ctx.beginPath();
+                ctx.ellipse(0, 0, radius * 1.4, radius, 0, 0, Math.PI * 2);
+                
+                if (method === 'charcoal') {
+                    // Dark Charcoal Surface with Glowing Core
+                    const darkRatio = Math.min(1, temp / 300);
+                    ctx.fillStyle = darkRatio > 0.6 ? '#18181B' : '#71717A';
+                    ctx.strokeStyle = '#F97316';
+                } else if (method === 'honey') {
+                    // Honey Glazed Warm Amber Slice
+                    ctx.fillStyle = '#D97706';
+                    ctx.strokeStyle = '#FEF3C7';
+                } else if (method === 'wine') {
+                    // Wine Soaked Reddish Herb
+                    ctx.fillStyle = '#B91C1C';
+                    ctx.strokeStyle = '#2200EE';
+                } else {
+                    // Vinegar Quenched Cut Slice
+                    ctx.fillStyle = '#E5E7EB';
+                    ctx.strokeStyle = '#2200EE';
+                }
+                
+                ctx.lineWidth = 3;
+                ctx.fill();
+                ctx.stroke();
+
+                // Inner Concentric Growth Rings of Astragalus Root
+                for (let r = radius * 0.3; r < radius * 0.9; r += radius * 0.25) {
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, r * 1.3, r, 0, 0, Math.PI * 2);
+                    ctx.strokeStyle = 'rgba(10, 10, 12, 0.25)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+
+                ctx.restore();
+            }
+
+            function animateProcess() {
+                animTick += 0.05;
+                ctx.fillStyle = '#0A0A0C';
+                ctx.fillRect(0, 0, w, h);
+
+                const cx = w / 2;
+                const cy = h / 2 + Math.sin(animTick) * 4;
+                const temp = parseInt(state.process.temp);
+
+                // Render Central Herb Slice
+                drawHerbCrossSection(cx, cy, 55, method, temp);
+
+                // Method-Specific Render Rules
+                procParticles.forEach(p => {
+                    if (method === 'honey') {
+                        // Honey Roasting: Slow Simmering Viscous Honey Bubbles
+                        p.y += Math.sin(animTick + p.x) * 0.8 - 0.2;
+                        p.radius = Math.abs(Math.sin(animTick + p.life)) * 8 + 3;
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(217, 119, 6, 0.7)';
+                        ctx.strokeStyle = '#FDE68A';
+                        ctx.lineWidth = 1;
+                        ctx.fill();
+                        ctx.stroke();
+                    } 
+                    else if (method === 'vinegar') {
+                        // Vinegar Quenching: Violent Effervescence & Rapid Steam Jet
+                        p.y -= (temp / 80) + Math.random() * 2;
+                        p.x += (Math.random() - 0.5) * 3;
+                        if (p.y < 0) { p.y = h; p.x = cx + (Math.random() - 0.5) * 120; }
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius * 0.8, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(34, 0, 238, 0.6)';
+                        ctx.fill();
+                    } 
+                    else if (method === 'wine') {
+                        // Wine Stir-frying: Wok Swirl & Blue Flame Vortex
+                        const angle = animTick * 2 + p.life * Math.PI * 2;
+                        const dist = 60 + Math.sin(p.life * 10) * 40;
+                        p.x = cx + Math.cos(angle) * dist;
+                        p.y = cy + Math.sin(angle) * (dist * 0.5);
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(34, 0, 238, 0.8)' : 'rgba(220, 38, 38, 0.8)';
+                        ctx.fill();
+                    } 
+                    else if (method === 'charcoal') {
+                        // Charcoal Carbonization: Glowing Orange Embers & Ascending Ash Particles
+                        p.y -= 1.5;
+                        p.x += Math.sin(animTick + p.y * 0.05) * 1.5;
+                        if (p.y < 0) { p.y = h; p.x = cx + (Math.random() - 0.5) * 100; }
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, Math.random() * 3 + 1, 0, Math.PI * 2);
+                        ctx.fillStyle = Math.random() > 0.3 ? '#F97316' : '#EF4444';
+                        ctx.fill();
+                    }
+                });
+
+                processAnimId = requestAnimationFrame(animateProcess);
+            }
+
+            animateProcess();
+        }
+
+        // Print & Export Prescription
+        function printPrescription() {
+            window.print();
+        }
+
+        // Window Onload Initialization
+        window.onload = function() {
+            setupExclusiveCursor();
+            renderMapCanvas();
+            calcDiagnosis();
+            initRadarChart();
+            initProcessCanvas();
+
+            // Resize listener
+            window.addEventListener('resize', () => {
+                if (state.currentTab === 'map') renderMapCanvas();
+                if (state.currentTab === 'process') initProcessCanvas();
+            });
+        };
+    </script>
+</body>
+</html>
