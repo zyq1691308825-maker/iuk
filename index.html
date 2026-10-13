@@ -145,12 +145,10 @@
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col justify-between relative selection:bg-cobalt selection:text-white">
 
-    <!-- Exclusive Hand-Drawn Brutalist Cursor Pointer Element (Matching Image Specs) -->
+    <!-- Exclusive Hand-Drawn Brutalist Cursor Pointer Element -->
     <div id="custom-cursor">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Thick Outer Black Stroke Path for Brutalist Outline -->
             <path d="M 3 3 L 26 15 L 16 19 L 12 28 Z" fill="#D4D4D8" stroke="#0A0A0C" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <!-- Inner Light-Gray Fill Layer -->
             <path d="M 4.5 4.5 L 23.5 14.5 L 15 18 L 11.5 25.5 Z" fill="#E4E4E7"/>
         </svg>
     </div>
@@ -206,7 +204,6 @@
 
         <!-- SECTION 1: 前端页 / 入口页 -->
         <section id="sec-portal" class="tab-content space-y-8">
-            <!-- Hero Matrix Title Banner -->
             <div class="relative border-brutal bg-paper p-6 md:p-12 shadow-brutal overflow-hidden">
                 <div class="absolute right-0 top-0 w-1/3 h-full halftone-overlay opacity-20 pointer-events-none"></div>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative z-10">
@@ -304,7 +301,7 @@
                     </div>
                     <div class="bg-white/10 p-3 border border-white/30">
                         <div class="text-lg font-bold">04. 炮制转化</div>
-                        <div class="opacity-80 mt-1">蜜炙/醋淬/酒炒/炭化</div>
+                        <div class="opacity-80 mt-1">蜜炙/醋淬/酒炒/米炒</div>
                     </div>
                     <div class="bg-white/10 p-3 border border-white/30 col-span-2 md:col-span-1">
                         <div class="text-lg font-bold">05. 医案生成</div>
@@ -335,7 +332,6 @@
                         <div class="text-gray-500 text-[10px]">Click pin to switch herb context</div>
                     </div>
 
-                    <!-- Canvas Interactive Map -->
                     <div class="relative w-full h-[360px] bg-paper border border-ink overflow-hidden my-auto" id="map-container">
                         <canvas id="shanxi-map-canvas" class="w-full h-full block"></canvas>
                     </div>
@@ -402,7 +398,7 @@
             </div>
         </section>
 
-        <!-- SECTION 3: 问诊 (4-Diagnostics Clinical Matrix - 望闻问切) -->
+        <!-- SECTION 3: 问诊 -->
         <section id="sec-diag" class="tab-content hidden space-y-6">
             <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
                 <div>
@@ -415,10 +411,9 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Left 2 Columns: Diagnostics Questions Checklist -->
+                <!-- Diagnostic Checklist -->
                 <div class="md:col-span-2 space-y-6">
-                    
-                    <!-- 望诊: Tongue Diagnosis -->
+                    <!-- 望诊 -->
                     <div class="border-brutal bg-white p-5 shadow-brutal">
                         <h3 class="font-bold text-lg mb-3 flex items-center gap-2 border-b border-ink pb-2">
                             <span class="bg-cobalt text-white text-xs px-2 py-0.5 font-mono">01</span> 望诊 (舌象特征)
@@ -439,7 +434,7 @@
                         </div>
                     </div>
 
-                    <!-- 切诊: Pulse Condition -->
+                    <!-- 切诊 -->
                     <div class="border-brutal bg-white p-5 shadow-brutal">
                         <h3 class="font-bold text-lg mb-3 flex items-center gap-2 border-b border-ink pb-2">
                             <span class="bg-cobalt text-white text-xs px-2 py-0.5 font-mono">02</span> 切诊 (脉象特征)
@@ -460,7 +455,7 @@
                         </div>
                     </div>
 
-                    <!-- 问诊: Symptom Select Matrix -->
+                    <!-- 问诊 -->
                     <div class="border-brutal bg-white p-5 shadow-brutal">
                         <h3 class="font-bold text-lg mb-3 flex items-center gap-2 border-b border-ink pb-2">
                             <span class="bg-cobalt text-white text-xs px-2 py-0.5 font-mono">03</span> 问诊与闻诊 (多选临床表现)
@@ -495,7 +490,7 @@
 
                 </div>
 
-                <!-- Right Column: Real-time Syndrome Resolution Output -->
+                <!-- Syndrome Resolution Panel -->
                 <div class="border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between">
                     <div>
                         <div class="border-b-2 border-ink pb-3 mb-4">
@@ -537,7 +532,7 @@
             </div>
         </section>
 
-        <!-- SECTION 4: 配伍 (Jun-Chen-Zuo-Shi Formula Synergy Matrix) -->
+        <!-- SECTION 4: 配伍 -->
         <section id="sec-synergy" class="tab-content hidden space-y-6">
             <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
                 <div>
@@ -550,14 +545,14 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Left Side: Dosage Sliders -->
+                <!-- Dosage Sliders -->
                 <div class="lg:col-span-7 border-brutal bg-white p-6 shadow-brutal space-y-6">
                     <h3 class="font-bold text-lg border-b border-ink pb-2 flex justify-between items-center">
                         <span>三味晋药 + 辅药剂量调配</span>
                         <span class="text-xs font-mono text-gray-500">Unit: Grams (g)</span>
                     </h3>
 
-                    <!-- Huangqi Slider -->
+                    <!-- Huangqi -->
                     <div class="space-y-2 border-brutal p-4 bg-paper">
                         <div class="flex justify-between items-center font-bold">
                             <span class="flex items-center gap-2">
@@ -567,14 +562,9 @@
                             <span class="font-mono text-cobalt text-lg"><span id="val-huangqi">30</span> g</span>
                         </div>
                         <input type="range" id="slide-huangqi" min="5" max="60" value="30" oninput="updateSynergyMatrix()" class="w-full accent-cobalt">
-                        <div class="flex justify-between text-[10px] font-mono text-gray-500">
-                            <span>微量 (5g)</span>
-                            <span>补气常用 (30g)</span>
-                            <span>重用升阳 (60g)</span>
-                        </div>
                     </div>
 
-                    <!-- Dangshen Slider -->
+                    <!-- Dangshen -->
                     <div class="space-y-2 border-brutal p-4 bg-paper">
                         <div class="flex justify-between items-center font-bold">
                             <span class="flex items-center gap-2">
@@ -584,14 +574,9 @@
                             <span class="font-mono text-cobalt text-lg"><span id="val-dangshen">12</span> g</span>
                         </div>
                         <input type="range" id="slide-dangshen" min="3" max="30" value="12" oninput="updateSynergyMatrix()" class="w-full accent-cobalt">
-                        <div class="flex justify-between text-[10px] font-mono text-gray-500">
-                            <span>辅药 (3g)</span>
-                            <span>健脾 (12g)</span>
-                            <span>强效 (30g)</span>
-                        </div>
                     </div>
 
-                    <!-- Chaihu Slider -->
+                    <!-- Chaihu -->
                     <div class="space-y-2 border-brutal p-4 bg-paper">
                         <div class="flex justify-between items-center font-bold">
                             <span class="flex items-center gap-2">
@@ -601,14 +586,9 @@
                             <span class="font-mono text-cobalt text-lg"><span id="val-chaihu">6</span> g</span>
                         </div>
                         <input type="range" id="slide-chaihu" min="1" max="18" value="6" oninput="updateSynergyMatrix()" class="w-full accent-cobalt">
-                        <div class="flex justify-between text-[10px] font-mono text-gray-500">
-                            <span>引药/升阳 (3g-6g)</span>
-                            <span>疏肝 (9g)</span>
-                            <span>退热 (18g)</span>
-                        </div>
                     </div>
 
-                    <!-- Licorice / Assistant Herb -->
+                    <!-- Licorice -->
                     <div class="space-y-2 border-brutal p-4 bg-paper">
                         <div class="flex justify-between items-center font-bold">
                             <span class="flex items-center gap-2">
@@ -621,7 +601,7 @@
                     </div>
                 </div>
 
-                <!-- Right Side: Radar Chart Potency Analysis -->
+                <!-- Radar Chart -->
                 <div class="lg:col-span-5 border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between">
                     <div>
                         <h3 class="font-bold text-lg border-b border-ink pb-2 mb-4">方剂效能与相畏相使评估</h3>
@@ -654,111 +634,165 @@
             </div>
         </section>
 
-        <!-- SECTION 5: 炮制 (Processing Laboratory - 九蒸八炮动画实验室) -->
+        <!-- SECTION 5: 炮制工坊 (Interactive Traditional Processing Workshop) -->
         <section id="sec-process" class="tab-content hidden space-y-6">
+            <!-- Header Bar -->
             <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
                 <div>
-                    <h2 class="text-2xl font-black">九蒸八炮 · 炮制模拟实验室</h2>
-                    <p class="text-xs font-mono text-cobalt font-bold">ALCHEMICAL PROCESSING SIMULATION // FIRE & LIQUID TRANSFORMATIONS</p>
+                    <h2 class="text-2xl font-black text-ink">05. 炮制工坊 · 熟药转化</h2>
+                    <p class="text-xs font-mono text-cobalt font-bold">INTERACTIVE PROCESSING WORKSHOP // FIRE, TIME & AUXILIARY TRANSFORMATIONS</p>
                 </div>
-                <div class="font-mono text-xs bg-cobalt text-white px-3 py-1 border-brutal font-bold">
-                    HERBAL REACTION SIMULATOR ACTIVE
+                <div class="font-mono text-xs bg-cobalt text-white px-3 py-1 border-brutal font-bold hidden sm:block">
+                    TRADITIONAL WORKSHOP SIMULATOR ACTIVE
                 </div>
             </div>
 
+            <!-- Main Interactive Workshop Stage -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Method Selection Bar & Controls -->
-                <div class="lg:col-span-4 border-brutal bg-white p-6 shadow-brutal space-y-6">
-                    <h3 class="font-bold text-lg border-b border-ink pb-2">选择炮制工艺 (Processing Method)</h3>
-
-                    <div class="space-y-3 font-mono text-xs">
-                        <!-- Honey Roasting -->
-                        <button onclick="setProcessMethod('honey')" id="btn-proc-honey" class="proc-btn border-brutal w-full p-3 text-left bg-cobalt text-white font-bold transition-all">
-                            <div class="flex justify-between items-center">
-                                <span>01. 蜜炙 (Honey Roasting)</span>
-                                <i class="fa-solid fa-jar text-amber-300"></i>
+                
+                <!-- Left Column: Herbal Cabinet (Herbs & Auxiliaries for Drag/Clicking) -->
+                <div class="lg:col-span-4 border-brutal bg-white p-5 shadow-brutal flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="font-bold text-base border-b-2 border-ink pb-2 mb-3 flex items-center justify-between">
+                            <span><i class="fa-solid fa-boxes-packing text-cobalt"></i> 百草药柜与辅料</span>
+                            <span class="text-[10px] font-mono text-gray-500">拖拽或点击加入铁锅</span>
+                        </h3>
+                        
+                        <!-- Base Herb Selection -->
+                        <div class="mb-4">
+                            <span class="text-xs font-mono font-bold text-cobalt block mb-2">// 待炮制主药材</span>
+                            <div class="grid grid-cols-3 gap-2 font-mono text-xs">
+                                <button onclick="selectWorkshopHerb('生黄芪')" id="btn-herb-hq" class="herb-select-btn border-brutal p-2 bg-cobalt text-white font-bold text-center">
+                                    生黄芪
+                                </button>
+                                <button onclick="selectWorkshopHerb('党参')" id="btn-herb-ds" class="herb-select-btn border-brutal p-2 bg-paper text-ink font-bold text-center hover:bg-cobalt-light">
+                                    生党参
+                                </button>
+                                <button onclick="selectWorkshopHerb('柴胡')" id="btn-herb-ch" class="herb-select-btn border-brutal p-2 bg-paper text-ink font-bold text-center hover:bg-cobalt-light">
+                                    生柴胡
+                                </button>
                             </div>
-                            <div class="text-[10px] opacity-80 mt-1">适合: 黄芪 / 增强润肺补中作用</div>
-                        </button>
+                        </div>
 
-                        <!-- Vinegar Quenching -->
-                        <button onclick="setProcessMethod('vinegar')" id="btn-proc-vinegar" class="proc-btn border-brutal w-full p-3 text-left bg-paper text-ink transition-all">
-                            <div class="flex justify-between items-center">
-                                <span>02. 醋淬 (Vinegar Quenching)</span>
-                                <i class="fa-solid fa-flask text-cobalt"></i>
+                        <!-- Auxiliaries Cabinet Grid -->
+                        <div>
+                            <span class="text-xs font-mono font-bold text-cobalt block mb-2">// 炮制液体/固体辅料 (可多选)</span>
+                            <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+                                <div draggable="true" ondragstart="dragAuxiliary(event, '炼蜜')" onclick="addAuxiliaryDirect('炼蜜')" class="border-brutal p-3 bg-paper hover:bg-cobalt-light cursor-grab flex items-center justify-between">
+                                    <span><i class="fa-solid fa-jar text-amber-500 mr-1"></i> 炼蜜</span>
+                                    <span class="text-[10px] text-cobalt font-bold">+蜜炙</span>
+                                </div>
+                                <div draggable="true" ondragstart="dragAuxiliary(event, '米醋')" onclick="addAuxiliaryDirect('米醋')" class="border-brutal p-3 bg-paper hover:bg-cobalt-light cursor-grab flex items-center justify-between">
+                                    <span><i class="fa-solid fa-flask text-cobalt mr-1"></i> 米醋</span>
+                                    <span class="text-[10px] text-cobalt font-bold">+醋淬</span>
+                                </div>
+                                <div draggable="true" ondragstart="dragAuxiliary(event, '黄酒')" onclick="addAuxiliaryDirect('黄酒')" class="border-brutal p-3 bg-paper hover:bg-cobalt-light cursor-grab flex items-center justify-between">
+                                    <span><i class="fa-solid fa-wine-bottle text-red-600 mr-1"></i> 黄酒</span>
+                                    <span class="text-[10px] text-cobalt font-bold">+酒炒</span>
+                                </div>
+                                <div draggable="true" ondragstart="dragAuxiliary(event, '大米')" onclick="addAuxiliaryDirect('大米')" class="border-brutal p-3 bg-paper hover:bg-cobalt-light cursor-grab flex items-center justify-between">
+                                    <span><i class="fa-solid fa-bowl-rice text-amber-700 mr-1"></i> 大米</span>
+                                    <span class="text-[10px] text-cobalt font-bold">+米炒</span>
+                                </div>
                             </div>
-                            <div class="text-[10px] text-gray-600 mt-1">适合: 柴胡 / 引药入肝，增强疏肝止痛</div>
-                        </button>
-
-                        <!-- Wine Stirring -->
-                        <button onclick="setProcessMethod('wine')" id="btn-proc-wine" class="proc-btn border-brutal w-full p-3 text-left bg-paper text-ink transition-all">
-                            <div class="flex justify-between items-center">
-                                <span>03. 酒炒 (Wine Stir-frying)</span>
-                                <i class="fa-solid fa-wine-bottle text-red-600"></i>
-                            </div>
-                            <div class="text-[10px] text-gray-600 mt-1">适合: 党参 / 活血通络，升提药力</div>
-                        </button>
-
-                        <!-- Charcoal Baking -->
-                        <button onclick="setProcessMethod('charcoal')" id="btn-proc-charcoal" class="proc-btn border-brutal w-full p-3 text-left bg-paper text-ink transition-all">
-                            <div class="flex justify-between items-center">
-                                <span>04. 炒炭 (Charcoal Carbonization)</span>
-                                <i class="fa-solid fa-fire text-orange-600"></i>
-                            </div>
-                            <div class="text-[10px] text-gray-600 mt-1">适合: 止血固涩，性味转为苦温收敛</div>
-                        </button>
+                        </div>
                     </div>
 
-                    <!-- Temperature & Intensity Slider -->
+                    <!-- Fire & Heat Control Panel -->
                     <div class="border-brutal p-4 bg-paper space-y-3">
                         <div class="flex justify-between items-center font-bold text-xs font-mono">
-                            <span>炮制火力 (Heat Temp):</span>
-                            <span class="text-cobalt text-base" id="temp-display">180 °C</span>
+                            <span><i class="fa-solid fa-fire text-orange-600"></i> 火力设置 (Heat Control):</span>
+                            <span class="text-cobalt text-base" id="wok-fire-display">文火 (120°C)</span>
                         </div>
-                        <input type="range" id="slide-temp" min="80" max="350" value="180" oninput="updateProcessPhysics()" class="w-full accent-cobalt">
+                        
+                        <!-- Fire Preset Buttons -->
+                        <div class="grid grid-cols-3 gap-2 font-mono text-[11px]">
+                            <button onclick="setWokFire('low')" id="btn-fire-low" class="fire-btn border-brutal p-1.5 bg-cobalt text-white font-bold text-center">文火</button>
+                            <button onclick="setWokFire('mid')" id="btn-fire-mid" class="fire-btn border-brutal p-1.5 bg-paper text-ink font-bold text-center hover:bg-cobalt-light">中火</button>
+                            <button onclick="setWokFire('high')" id="btn-fire-high" class="fire-btn border-brutal p-1.5 bg-paper text-ink font-bold text-center hover:bg-cobalt-light">武火</button>
+                        </div>
+
+                        <input type="range" id="wok-temp-slider" min="80" max="320" value="120" oninput="manualTempSlider(this.value)" class="w-full accent-cobalt">
                         <div class="flex justify-between text-[10px] font-mono text-gray-500">
-                            <span>文火 (80°C)</span>
-                            <span>武火 (220°C)</span>
-                            <span>炭化 (350°C)</span>
+                            <span>微温 (80°C)</span>
+                            <span>炒黄 (160°C)</span>
+                            <span>焦炭 (320°C)</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Processing Animation Canvas Simulation -->
-                <div class="lg:col-span-8 border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between relative min-h-[400px]">
-                    <div class="flex justify-between items-center border-b border-ink pb-2 mb-4 font-mono text-xs">
-                        <span class="font-bold flex items-center gap-2">
-                            <i class="fa-solid fa-microscope text-cobalt"></i>
-                            实时微观反应器: <span id="proc-canvas-title" class="text-cobalt uppercase">蜜炙 (Honey Roasting)</span>
-                        </span>
-                        <span class="text-gray-500">HERB SLICE & CHEMICAL DYNAMICS</span>
+                <!-- Center & Right Column: Interactive Wok Stage & Processing Monitor -->
+                <div class="lg:col-span-8 border-brutal bg-white p-6 shadow-brutal flex flex-col justify-between space-y-4">
+                    
+                    <div class="flex justify-between items-center border-b-2 border-ink pb-2 font-mono text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-cobalt text-white px-2 py-0.5 font-bold">WOK STAGE</span>
+                            <span class="font-bold text-ink" id="current-wok-title">当前锅内: 生黄芪</span>
+                        </div>
+                        <div class="text-cobalt font-bold" id="wok-aux-tags">添加辅料: 无</div>
                     </div>
 
-                    <!-- Canvas Animation Viewport -->
-                    <div class="relative w-full h-[280px] bg-ink border-2 border-ink overflow-hidden my-auto" id="process-canvas-container">
-                        <canvas id="process-canvas" class="w-full h-full block"></canvas>
+                    <!-- Central Wok Canvas Container -->
+                    <div class="relative w-full h-[320px] bg-ink border-2 border-ink overflow-hidden" 
+                         id="wok-canvas-container"
+                         ondragover="allowWokDrop(event)"
+                         ondrop="dropAuxiliary(event)">
                         
-                        <!-- Overlay parameters readout -->
-                        <div class="absolute bottom-3 left-3 bg-paper/90 border-brutal px-3 py-1 font-mono text-[11px] space-y-0.5">
-                            <div>活性成分存留: <strong id="chem-active-ret" class="text-cobalt">94.2%</strong></div>
-                            <div>毒性/燥烈度: <strong id="chem-toxicity" class="text-red-600">-38.0%</strong></div>
+                        <canvas id="wok-canvas" class="w-full h-full block"></canvas>
+
+                        <!-- On-Screen Animated Progress Overlay -->
+                        <div class="absolute top-3 left-3 bg-paper/90 border-brutal px-3 py-2 font-mono text-xs space-y-1 z-10">
+                            <div>炮制进度: <strong id="wok-progress-text" class="text-cobalt">0%</strong></div>
+                            <div class="w-36 bg-gray-300 h-2 border border-ink overflow-hidden">
+                                <div id="wok-progress-bar" class="bg-cobalt h-full w-0"></div>
+                            </div>
+                            <div>成药规格: <strong id="wok-result-spec" class="text-ink">生用 (未炒)</strong></div>
+                        </div>
+
+                        <!-- Real-time Quality & Alert Badge -->
+                        <div class="absolute top-3 right-3 bg-paper/90 border-brutal px-3 py-2 font-mono text-xs z-10 text-right">
+                            <div class="text-[10px] text-gray-500">焦化风险 (Burn Risk)</div>
+                            <div id="wok-burn-risk" class="font-bold text-green-600">极低 (0%)</div>
+                        </div>
+
+                        <!-- Stir Shovel Floating Dynamic Prompt -->
+                        <div id="stir-prompt" class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-cobalt text-white px-4 py-1.5 border-brutal border-ink font-mono text-xs font-bold pointer-events-none animate-bounce">
+                            <i class="fa-solid fa-hand-pointer mr-1"></i> 鼠标悬停在铁锅上翻炒药材
                         </div>
                     </div>
 
-                    <!-- Bottom Action Step -->
-                    <div class="pt-4 border-t border-ink flex justify-between items-center gap-4 mt-4">
-                        <p class="font-mono text-xs text-gray-600">
-                            炮制转化完成。药力已由生用转为定制药效。
-                        </p>
-                        <button onclick="switchTab('recipe')" class="btn-brutal-cobalt bg-cobalt text-white font-bold px-6 py-2.5 border-brutal-cobalt font-mono text-xs whitespace-nowrap">
-                            生成最终医案方卷 <i class="fa-solid fa-scroll"></i>
+                    <!-- Workshop Control Buttons -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+                        <button onclick="startProcessingSim()" id="btn-start-wok" class="btn-brutal-cobalt bg-cobalt text-white font-bold p-3 border-brutal-cobalt flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> 开火生灶 (Start Processing)
+                        </button>
+                        <button onclick="pauseProcessingSim()" id="btn-pause-wok" class="btn-brutal bg-paper text-ink font-bold p-3 border-brutal flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-pause"></i> 停火出锅 (Finish / Collect)
+                        </button>
+                        <button onclick="resetWokStage()" class="btn-brutal bg-paper text-ink border-brutal p-3 font-bold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-rotate-left"></i> 清空铁锅 (Reset Wok)
                         </button>
                     </div>
+
+                    <!-- Processing Specifications Quick Reference Accordion -->
+                    <div class="border-brutal bg-paper p-4 font-mono text-xs space-y-2">
+                        <div class="font-bold text-cobalt flex items-center justify-between border-b border-ink/20 pb-1">
+                            <span><i class="fa-solid fa-book-medical"></i> 晋药古法炮制规范典籍</span>
+                            <span>TAIHANG PHARMACOPEIA</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-gray-700">
+                            <div>• <strong>蜜黄芪:</strong> 每100g黄芪加炼蜜25g。文火炒至深黄色不粘手，增强补中益气。</div>
+                            <div>• <strong>醋柴胡:</strong> 每100g柴胡加米醋20g。文火炒干，引药入肝，专于疏肝止痛。</div>
+                            <div>• <strong>酒党参:</strong> 每100g党参加黄酒15g。微火炒至微黄，增强活血通络之功。</div>
+                            <div>• <strong>米炒党参:</strong> 每100g党参加大米20g。炒至大米焦黄，增强健脾止泻功效。</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 6: 方子生成 (Prescription Dossier Scroll) -->
+        <!-- SECTION 6: 方子生成 -->
         <section id="sec-recipe" class="tab-content hidden space-y-6">
             <div class="border-brutal bg-paper p-6 shadow-brutal flex justify-between items-center">
                 <div>
@@ -775,11 +809,10 @@
                 </div>
             </div>
 
-            <!-- Authentic Brutalist Prescription Document -->
+            <!-- Prescription Document -->
             <div class="border-2 border-ink bg-white p-8 md:p-12 shadow-brutal max-w-4xl mx-auto space-y-8 relative overflow-hidden" id="printable-prescription">
                 <div class="absolute top-0 right-0 w-32 h-32 halftone-overlay opacity-10 pointer-events-none"></div>
 
-                <!-- Header Document Info -->
                 <div class="border-b-4 border-ink pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                     <div>
                         <div class="bg-cobalt text-white font-mono text-xs px-2 py-0.5 inline-block font-bold mb-2">
@@ -905,9 +938,16 @@
                 chaihu: 6,
                 licorice: 5
             },
-            process: {
-                method: 'honey',
-                temp: 180
+            // Interactive Workshop State
+            workshop: {
+                herb: '生黄芪',
+                auxiliaries: [],
+                temp: 120,
+                isCooking: false,
+                progress: 0,
+                stirSpeed: 0,
+                burnRisk: 0,
+                specResult: '生用 (未炒)'
             }
         };
 
@@ -952,7 +992,7 @@
             }, 2500);
         }
 
-        // Custom Brutalist Cursor Positioning & Interactive Wave Ripples System
+        // Custom Cursor & Interaction Canvas
         let ripples = [];
         const cursorEl = document.getElementById('custom-cursor');
         const rippleCanvas = document.getElementById('ripple-canvas');
@@ -965,10 +1005,8 @@
             rippleCtx = rippleCanvas.getContext('2d');
 
             window.addEventListener('mousemove', (e) => {
-                // Move custom site-exclusive cursor exactly with mouse pointer
                 cursorEl.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
 
-                // Add subtle trailing ripple points on movement
                 if (Math.random() < 0.25) {
                     ripples.push({
                         x: e.clientX,
@@ -982,7 +1020,6 @@
             });
 
             window.addEventListener('mousedown', (e) => {
-                // Trigger vivid cobalt splash wave on click
                 ripples.push({
                     x: e.clientX,
                     y: e.clientY,
@@ -1038,9 +1075,8 @@
                 activeNav.classList.remove('bg-paper', 'text-ink');
             }
 
-            // Trigger Canvas resizes if switching to map or process tab
             if (tabId === 'map') renderMapCanvas();
-            if (tabId === 'process') initProcessCanvas();
+            if (tabId === 'process') initInteractiveWokCanvas();
             if (tabId === 'synergy') initRadarChart();
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1051,7 +1087,6 @@
             menu.classList.toggle('hidden');
         }
 
-        // Herb Inspection Switcher
         function inspectHerb(key) {
             state.selectedHerb = key;
             const data = herbData[key];
@@ -1088,11 +1123,9 @@
             const w = canvas.width;
             const h = canvas.height;
 
-            // Clear Background
             ctx.fillStyle = '#F4F4F6';
             ctx.fillRect(0, 0, w, h);
 
-            // Draw Wireframe Grid Guide
             ctx.strokeStyle = '#2200EE15';
             ctx.lineWidth = 1;
             const step = 20;
@@ -1103,7 +1136,6 @@
                 ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
             }
 
-            // Draw Stylized Shanxi Boundary Wireframe Contour
             ctx.beginPath();
             ctx.moveTo(w * 0.45, h * 0.1);
             ctx.lineTo(w * 0.65, h * 0.2);
@@ -1119,19 +1151,16 @@
             ctx.lineWidth = 2;
             ctx.stroke();
 
-            // Pins Coordinates
             const pins = {
                 huangqi: { x: w * 0.58, y: h * 0.22, name: '恒山 (黄芪)', color: '#D97706' },
                 dangshen: { x: w * 0.60, y: h * 0.58, name: '平顺 (党参)', color: '#DC2626' },
                 chaihu: { x: w * 0.38, y: h * 0.80, name: '运城 (柴胡)', color: '#2200EE' }
             };
 
-            // Draw pins
             Object.keys(pins).forEach(key => {
                 const p = pins[key];
                 const isSelected = (state.selectedHerb === key);
 
-                // Pulse Effect
                 if (isSelected) {
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, 18, 0, Math.PI * 2);
@@ -1147,13 +1176,11 @@
                 ctx.lineWidth = 2;
                 ctx.stroke();
 
-                // Text Label
                 ctx.font = 'bold 12px JetBrains Mono, sans-serif';
                 ctx.fillStyle = '#0A0A0C';
                 ctx.fillText(p.name, p.x + 12, p.y + 4);
             });
 
-            // Click listener on Canvas
             canvas.onclick = function(e) {
                 const rect = canvas.getBoundingClientRect();
                 const mx = e.clientX - rect.left;
@@ -1170,7 +1197,7 @@
             };
         }
 
-        // Four Diagnostics Calc Logic
+        // Diagnostic Logic
         function calcDiagnosis() {
             const tongue = document.querySelector('input[name="tongue"]:checked')?.value || 'pale_fat';
             const pulse = document.querySelector('input[name="pulse"]:checked')?.value || 'weak_slow';
@@ -1235,9 +1262,7 @@
             const ctx = document.getElementById('synergy-radar-chart');
             if (!ctx) return;
 
-            if (radarChartInstance) {
-                radarChartInstance.destroy();
-            }
+            if (radarChartInstance) radarChartInstance.destroy();
 
             radarChartInstance = new Chart(ctx, {
                 type: 'radar',
@@ -1287,7 +1312,6 @@
             const total = hq + ds + ch + gc;
             document.getElementById('total-dosage-disp').innerText = total;
 
-            // Recalculate radar points
             const buqi = Math.min(100, Math.round((hq * 1.5 + ds * 1.2)));
             const shugan = Math.min(100, Math.round(ch * 5.5));
             const tiaohe = Math.min(100, Math.round(gc * 15 + ds * 1.5));
@@ -1308,60 +1332,144 @@
                 radarChartInstance.update();
             }
 
-            // Sync with Prescription Scroll Page
             document.getElementById('rec-dose-hq').innerText = `${hq} g`;
             document.getElementById('rec-dose-ds').innerText = `${ds} g`;
             document.getElementById('rec-dose-ch').innerText = `${ch} g`;
             document.getElementById('rec-dose-gc').innerText = `${gc} g`;
         }
 
-        // Advanced Processing Simulation Canvas (Distinct Visual Mechanics for Each Method)
-        let processAnimId = null;
-        let procParticles = [];
-        let animTick = 0;
+        // =========================================================================
+        // SECTION 05: INTERACTIVE PROCESSING WORKSHOP (FULL CANVAS & DRAG-DROP LOGIC)
+        // =========================================================================
+        let wokAnimId = null;
+        let wokParticles = [];
+        let wokHerbSlices = [];
+        let wokTick = 0;
+        let mouseInWok = false;
+        let lastMousePos = { x: 0, y: 0 };
 
-        function setProcessMethod(method) {
-            state.process.method = method;
-            document.querySelectorAll('.proc-btn').forEach(btn => {
+        function selectWorkshopHerb(herbName) {
+            state.workshop.herb = herbName;
+            document.querySelectorAll('.herb-select-btn').forEach(btn => {
                 btn.classList.remove('bg-cobalt', 'text-white');
                 btn.classList.add('bg-paper', 'text-ink');
             });
-            const activeBtn = document.getElementById(`btn-proc-${method}`);
+            
+            const btnMap = { '生黄芪': 'btn-herb-hq', '党参': 'btn-herb-ds', '柴胡': 'btn-herb-ch' };
+            const activeBtn = document.getElementById(btnMap[herbName]);
             if (activeBtn) {
                 activeBtn.classList.add('bg-cobalt', 'text-white');
                 activeBtn.classList.remove('bg-paper', 'text-ink');
             }
 
-            const titles = {
-                honey: '蜜炙 (Honey Roasting)',
-                vinegar: '醋淬 (Vinegar Quenching)',
-                wine: '酒炒 (Wine Stir-frying)',
-                charcoal: '炒炭 (Charcoal Carbonization)'
-            };
-            document.getElementById('proc-canvas-title').innerText = titles[method];
-
-            // Update prescription table specs
-            const specs = { honey: '蜜炙', vinegar: '醋淬', wine: '酒炒', charcoal: '炒炭' };
-            document.getElementById('rec-spec-hq').innerText = specs[method];
-
-            showToast(`调整炮制工艺为: ${titles[method]}`);
-            initProcessCanvas();
+            document.getElementById('current-wok-title').innerText = `当前锅内: ${herbName}`;
+            showToast(`主药材切换为: ${herbName}`);
+            evaluateWokSpecification();
+            resetWokStage();
         }
 
-        function updateProcessPhysics() {
-            const temp = document.getElementById('slide-temp').value;
-            state.process.temp = temp;
-            document.getElementById('temp-display').innerText = `${temp} °C`;
-
-            const ret = Math.max(60, (100 - (temp - 100) * 0.12)).toFixed(1);
-            const tox = (-20 - (temp - 100) * 0.25).toFixed(1);
-
-            document.getElementById('chem-active-ret').innerText = `${ret}%`;
-            document.getElementById('chem-toxicity').innerText = `${tox}%`;
+        function dragAuxiliary(ev, auxName) {
+            ev.dataTransfer.setData("auxName", auxName);
         }
 
-        function initProcessCanvas() {
-            const canvas = document.getElementById('process-canvas');
+        function allowWokDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function dropAuxiliary(ev) {
+            ev.preventDefault();
+            const auxName = ev.dataTransfer.getData("auxName");
+            if (auxName) {
+                addAuxiliaryDirect(auxName);
+            }
+        }
+
+        function addAuxiliaryDirect(auxName) {
+            if (!state.workshop.auxiliaries.includes(auxName)) {
+                state.workshop.auxiliaries.push(auxName);
+                document.getElementById('wok-aux-tags').innerText = `添加辅料: ${state.workshop.auxiliaries.join(', ')}`;
+                showToast(`已向铁锅加入辅料: [${auxName}]`);
+                evaluateWokSpecification();
+            } else {
+                showToast(`辅料 [${auxName}] 已在锅中`);
+            }
+        }
+
+        function setWokFire(mode) {
+            document.querySelectorAll('.fire-btn').forEach(btn => {
+                btn.classList.remove('bg-cobalt', 'text-white');
+                btn.classList.add('bg-paper', 'text-ink');
+            });
+            const btnMap = { low: 'btn-fire-low', mid: 'btn-fire-mid', high: 'btn-fire-high' };
+            document.getElementById(btnMap[mode]).classList.add('bg-cobalt', 'text-white');
+
+            const temps = { low: 120, mid: 180, high: 260 };
+            const labels = { low: '文火 (120°C)', mid: '中火 (180°C)', high: '武火 (260°C)' };
+
+            state.workshop.temp = temps[mode];
+            document.getElementById('wok-temp-slider').value = temps[mode];
+            document.getElementById('wok-fire-display').innerText = labels[mode];
+            showToast(`火力切换为: ${labels[mode]}`);
+        }
+
+        function manualTempSlider(val) {
+            state.workshop.temp = parseInt(val);
+            document.getElementById('wok-fire-display').innerText = `自定义火力 (${val}°C)`;
+        }
+
+        function evaluateWokSpecification() {
+            const h = state.workshop.herb;
+            const aux = state.workshop.auxiliaries;
+            const prog = state.workshop.progress;
+
+            let result = "生用 (未炒)";
+
+            if (prog < 20) {
+                result = `${h} (生用/初温微干)`;
+            } else if (prog >= 20 && prog < 80) {
+                if (aux.includes('炼蜜')) result = `蜜炙${h} (润肺补中)`;
+                else if (aux.includes('米醋')) result = `醋淬${h} (疏肝止痛)`;
+                else if (aux.includes('黄酒')) result = `酒炒${h} (活血通络)`;
+                else if (aux.includes('大米')) result = `米炒${h} (健脾止泻)`;
+                else result = `炒黄${h} (微香醒脾)`;
+            } else {
+                result = `焦炒/炒炭${h} (收敛止血)`;
+            }
+
+            state.workshop.specResult = result;
+            document.getElementById('wok-result-spec').innerText = result;
+
+            // Sync with final prescription table
+            if (h === '生黄芪') document.getElementById('rec-spec-hq').innerText = result;
+            if (h === '党参') document.getElementById('rec-spec-ds').innerText = result;
+            if (h === '柴胡') document.getElementById('rec-spec-ch').innerText = result;
+        }
+
+        function startProcessingSim() {
+            state.workshop.isCooking = true;
+            showToast("生灶开火！请移动鼠标在铁锅内翻炒药材");
+        }
+
+        function pauseProcessingSim() {
+            state.workshop.isCooking = false;
+            showToast(`停火出锅！最终炮制成品: ${state.workshop.specResult}`);
+        }
+
+        function resetWokStage() {
+            state.workshop.progress = 0;
+            state.workshop.burnRisk = 0;
+            state.workshop.auxiliaries = [];
+            document.getElementById('wok-aux-tags').innerText = '添加辅料: 无';
+            document.getElementById('wok-progress-bar').style.width = '0%';
+            document.getElementById('wok-progress-text').innerText = '0%';
+            document.getElementById('wok-burn-risk').innerText = '极低 (0%)';
+            document.getElementById('wok-burn-risk').className = 'font-bold text-green-600';
+            evaluateWokSpecification();
+            initInteractiveWokCanvas();
+        }
+
+        function initInteractiveWokCanvas() {
+            const canvas = document.getElementById('wok-canvas');
             if (!canvas) return;
             const container = canvas.parentElement;
             canvas.width = container.clientWidth;
@@ -1371,138 +1479,184 @@
             const w = canvas.width;
             const h = canvas.height;
 
-            procParticles = [];
-            const method = state.process.method;
-
-            // Generate particles suited for specific alchemical visual
-            const particleCount = method === 'vinegar' ? 120 : (method === 'charcoal' ? 80 : 70);
-            for (let i = 0; i < particleCount; i++) {
-                procParticles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 2,
-                    vy: (Math.random() - 0.5) * 2,
-                    radius: Math.random() * 6 + 2,
-                    life: Math.random(),
-                    color: '#2200EE'
+            // Initialize Herb Slices inside Wok
+            wokHerbSlices = [];
+            for (let i = 0; i < 28; i++) {
+                wokHerbSlices.push({
+                    x: w / 2 + (Math.random() - 0.5) * 160,
+                    y: h / 2 + (Math.random() - 0.5) * 90,
+                    rx: Math.random() * 16 + 14,
+                    ry: Math.random() * 8 + 6,
+                    angle: Math.random() * Math.PI,
+                    vx: 0,
+                    vy: 0
                 });
             }
 
-            if (processAnimId) cancelAnimationFrame(processAnimId);
+            // Canvas Interaction Handlers
+            canvas.onmouseenter = () => { mouseInWok = true; };
+            canvas.onmouseleave = () => { mouseInWok = false; };
+            canvas.onmousemove = (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                const my = e.clientY - rect.top;
 
-            function drawHerbCrossSection(cx, cy, radius, method, temp) {
-                ctx.save();
-                ctx.translate(cx, cy);
+                const dx = mx - lastMousePos.x;
+                const dy = my - lastMousePos.y;
+                const dist = Math.hypot(dx, dy);
 
-                // Base Herb Oval Slice Body
-                ctx.beginPath();
-                ctx.ellipse(0, 0, radius * 1.4, radius, 0, 0, Math.PI * 2);
-                
-                if (method === 'charcoal') {
-                    // Dark Charcoal Surface with Glowing Core
-                    const darkRatio = Math.min(1, temp / 300);
-                    ctx.fillStyle = darkRatio > 0.6 ? '#18181B' : '#71717A';
-                    ctx.strokeStyle = '#F97316';
-                } else if (method === 'honey') {
-                    // Honey Glazed Warm Amber Slice
-                    ctx.fillStyle = '#D97706';
-                    ctx.strokeStyle = '#FEF3C7';
-                } else if (method === 'wine') {
-                    // Wine Soaked Reddish Herb
-                    ctx.fillStyle = '#B91C1C';
-                    ctx.strokeStyle = '#2200EE';
-                } else {
-                    // Vinegar Quenched Cut Slice
-                    ctx.fillStyle = '#E5E7EB';
-                    ctx.strokeStyle = '#2200EE';
+                if (dist > 2 && state.workshop.isCooking) {
+                    state.workshop.stirSpeed = Math.min(10, dist);
+                    // Push nearby herb slices with stir shovel motion
+                    wokHerbSlices.forEach(slice => {
+                        const dSlice = Math.hypot(slice.x - mx, slice.y - my);
+                        if (dSlice < 60) {
+                            slice.vx += dx * 0.2;
+                            slice.vy += dy * 0.2;
+                        }
+                    });
                 }
-                
-                ctx.lineWidth = 3;
-                ctx.fill();
-                ctx.stroke();
+                lastMousePos = { x: mx, y: my };
+            };
 
-                // Inner Concentric Growth Rings of Astragalus Root
-                for (let r = radius * 0.3; r < radius * 0.9; r += radius * 0.25) {
-                    ctx.beginPath();
-                    ctx.ellipse(0, 0, r * 1.3, r, 0, 0, Math.PI * 2);
-                    ctx.strokeStyle = 'rgba(10, 10, 12, 0.25)';
-                    ctx.lineWidth = 1.5;
-                    ctx.stroke();
-                }
+            if (wokAnimId) cancelAnimationFrame(wokAnimId);
 
-                ctx.restore();
-            }
-
-            function animateProcess() {
-                animTick += 0.05;
+            function drawCastIronWok() {
                 ctx.fillStyle = '#0A0A0C';
                 ctx.fillRect(0, 0, w, h);
 
                 const cx = w / 2;
-                const cy = h / 2 + Math.sin(animTick) * 4;
-                const temp = parseInt(state.process.temp);
+                const cy = h / 2;
 
-                // Render Central Herb Slice
-                drawHerbCrossSection(cx, cy, 55, method, temp);
+                // Fire Glow beneath wok
+                if (state.workshop.isCooking) {
+                    const fireGrad = ctx.createRadialGradient(cx, cy + 60, 10, cx, cy + 80, 180);
+                    const temp = state.workshop.temp;
+                    const fireColor = temp > 220 ? '#DC2626' : (temp > 150 ? '#D97706' : '#2200EE');
+                    fireGrad.addColorStop(0, fireColor);
+                    fireGrad.addColorStop(1, 'transparent');
+                    ctx.fillStyle = fireGrad;
+                    ctx.fillRect(0, 0, w, h);
+                }
 
-                // Method-Specific Render Rules
-                procParticles.forEach(p => {
-                    if (method === 'honey') {
-                        // Honey Roasting: Slow Simmering Viscous Honey Bubbles
-                        p.y += Math.sin(animTick + p.x) * 0.8 - 0.2;
-                        p.radius = Math.abs(Math.sin(animTick + p.life)) * 8 + 3;
+                // Iron Wok Outer Bowl Border
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, 190, 110, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#18181B';
+                ctx.strokeStyle = '#2200EE';
+                ctx.lineWidth = 3;
+                ctx.fill();
+                ctx.stroke();
 
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = 'rgba(217, 119, 6, 0.7)';
-                        ctx.strokeStyle = '#FDE68A';
-                        ctx.lineWidth = 1;
-                        ctx.fill();
-                        ctx.stroke();
-                    } 
-                    else if (method === 'vinegar') {
-                        // Vinegar Quenching: Violent Effervescence & Rapid Steam Jet
-                        p.y -= (temp / 80) + Math.random() * 2;
-                        p.x += (Math.random() - 0.5) * 3;
-                        if (p.y < 0) { p.y = h; p.x = cx + (Math.random() - 0.5) * 120; }
-
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.radius * 0.8, 0, Math.PI * 2);
-                        ctx.fillStyle = 'rgba(34, 0, 238, 0.6)';
-                        ctx.fill();
-                    } 
-                    else if (method === 'wine') {
-                        // Wine Stir-frying: Wok Swirl & Blue Flame Vortex
-                        const angle = animTick * 2 + p.life * Math.PI * 2;
-                        const dist = 60 + Math.sin(p.life * 10) * 40;
-                        p.x = cx + Math.cos(angle) * dist;
-                        p.y = cy + Math.sin(angle) * (dist * 0.5);
-
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(34, 0, 238, 0.8)' : 'rgba(220, 38, 38, 0.8)';
-                        ctx.fill();
-                    } 
-                    else if (method === 'charcoal') {
-                        // Charcoal Carbonization: Glowing Orange Embers & Ascending Ash Particles
-                        p.y -= 1.5;
-                        p.x += Math.sin(animTick + p.y * 0.05) * 1.5;
-                        if (p.y < 0) { p.y = h; p.x = cx + (Math.random() - 0.5) * 100; }
-
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, Math.random() * 3 + 1, 0, Math.PI * 2);
-                        ctx.fillStyle = Math.random() > 0.3 ? '#F97316' : '#EF4444';
-                        ctx.fill();
-                    }
-                });
-
-                processAnimId = requestAnimationFrame(animateProcess);
+                // Iron Wok Inner Basin Surface
+                ctx.beginPath();
+                ctx.ellipse(cx, cy + 5, 170, 95, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#0A0A0C';
+                ctx.strokeStyle = '#2200EE55';
+                ctx.lineWidth = 1.5;
+                ctx.fill();
+                ctx.stroke();
             }
 
-            animateProcess();
+            function animateWokStage() {
+                wokTick += 0.04;
+                drawCastIronWok();
+
+                const cx = w / 2;
+                const cy = h / 2;
+
+                // Simulate Cooking Engine Progress & Burn Risk
+                if (state.workshop.isCooking) {
+                    state.workshop.progress = Math.min(100, state.workshop.progress + 0.08);
+                    
+                    // High heat without stirring increases burn risk
+                    if (state.workshop.temp > 180 && state.workshop.stirSpeed < 1) {
+                        state.workshop.burnRisk = Math.min(100, state.workshop.burnRisk + 0.3);
+                    } else {
+                        state.workshop.burnRisk = Math.max(0, state.workshop.burnRisk - 0.2);
+                    }
+
+                    // Decay stir speed
+                    state.workshop.stirSpeed *= 0.92;
+
+                    // Update UI Progress Displays
+                    document.getElementById('wok-progress-bar').style.width = `${state.workshop.progress}%`;
+                    document.getElementById('wok-progress-text').innerText = `${Math.round(state.workshop.progress)}%`;
+
+                    const riskEl = document.getElementById('wok-burn-risk');
+                    const riskVal = Math.round(state.workshop.burnRisk);
+                    riskEl.innerText = `${riskVal}%`;
+                    if (riskVal > 60) riskEl.className = 'font-bold text-red-600 animate-pulse';
+                    else if (riskVal > 30) riskEl.className = 'font-bold text-amber-600';
+                    else riskEl.className = 'font-bold text-green-600';
+
+                    evaluateWokSpecification();
+                }
+
+                // Render Herb Slices inside Wok
+                const prog = state.workshop.progress;
+                const aux = state.workshop.auxiliaries;
+
+                wokHerbSlices.forEach(s => {
+                    // Friction & Boundary Constraint inside wok bowl
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    s.vx *= 0.88;
+                    s.vy *= 0.88;
+
+                    const dCenter = Math.hypot(s.x - cx, (s.y - cy) * 1.6);
+                    if (dCenter > 150) {
+                        s.x = cx + (s.x - cx) * 0.92;
+                        s.y = cy + (s.y - cy) * 0.92;
+                    }
+
+                    ctx.save();
+                    ctx.translate(s.x, s.y);
+                    ctx.rotate(s.angle);
+
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, s.rx, s.ry, 0, 0, Math.PI * 2);
+
+                    // Color shifts based on processing progress & auxiliary
+                    if (prog > 80 || state.workshop.burnRisk > 60) {
+                        ctx.fillStyle = '#27272A'; // Charcoal Burned
+                        ctx.strokeStyle = '#F97316';
+                    } else if (prog > 25) {
+                        if (aux.includes('炼蜜')) { ctx.fillStyle = '#D97706'; ctx.strokeStyle = '#FDE68A'; }
+                        else if (aux.includes('黄酒')) { ctx.fillStyle = '#991B1B'; ctx.strokeStyle = '#2200EE'; }
+                        else { ctx.fillStyle = '#B45309'; ctx.strokeStyle = '#2200EE'; }
+                    } else {
+                        ctx.fillStyle = '#E5E7EB'; // Raw Slice
+                        ctx.strokeStyle = '#2200EE';
+                    }
+
+                    ctx.lineWidth = 1.5;
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.restore();
+                });
+
+                // Render Shovel & Heat Particles
+                if (mouseInWok && state.workshop.isCooking) {
+                    ctx.beginPath();
+                    ctx.moveTo(lastMousePos.x, lastMousePos.y);
+                    ctx.lineTo(lastMousePos.x + 25, lastMousePos.y - 45);
+                    ctx.strokeStyle = '#2200EE';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fillRect(lastMousePos.x - 12, lastMousePos.y - 6, 24, 12);
+                }
+
+                wokAnimId = requestAnimationFrame(animateWokStage);
+            }
+
+            animateWokStage();
         }
 
-        // Print & Export Prescription
+        // Print & Export
         function printPrescription() {
             window.print();
         }
@@ -1513,12 +1667,11 @@
             renderMapCanvas();
             calcDiagnosis();
             initRadarChart();
-            initProcessCanvas();
+            initInteractiveWokCanvas();
 
-            // Resize listener
             window.addEventListener('resize', () => {
                 if (state.currentTab === 'map') renderMapCanvas();
-                if (state.currentTab === 'process') initProcessCanvas();
+                if (state.currentTab === 'process') initInteractiveWokCanvas();
             });
         };
     </script>
